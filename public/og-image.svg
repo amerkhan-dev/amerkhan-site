@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Amer Khan — Built for the unexpected.</title>
+  <desc id="description">Software, AI and systems. UConn, class of 2028. A four-stage recovery trace moves through Record, Pay, Crash and Recover.</desc>
+  <rect width="1200" height="630" fill="#f4f6f8"/>
+  <path d="M64 126H1136M64 520H1136" stroke="#d6dee5"/>
+  <g fill="none" stroke="#244cc8" stroke-width="3.5" stroke-linejoin="round">
+    <path d="M67 94V60h12v34M67 81h12M91 60v34M104 60 91 77l13 17"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#182c3b">
+    <text x="123" y="89" font-size="32" font-weight="700" letter-spacing="-1">Amer Khan</text>
+    <text x="64" y="257" font-size="75" font-weight="700" letter-spacing="-3.7">Built for the</text>
+    <text x="64" y="341" font-size="75" font-weight="700" letter-spacing="-3.7">unexpected.</text>
+    <text x="66" y="402" font-size="25" letter-spacing="-.5">Software, AI &amp; systems</text>
+    <text x="64" y="568" font-size="19">UConn / Class of 2028</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#536575">
+    <text x="1136" y="87" text-anchor="end">amerkhan.vercel.app</text>
+    <text x="1136" y="568" text-anchor="end">From the first decision to the last mile.</text>
+  </g>
+  <g transform="translate(792 176)">
+    <rect x="0" y="0" width="344" height="292" rx="5" fill="#fff" stroke="#c4d0dd"/>
+    <path d="M-5 9V-5H9M335 297h14v-14" fill="none" stroke="#244cc8" stroke-width="1.5"/>
+    <path d="M0 48h344" stroke="#d6dee5"/>
+    <text x="23" y="30" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#536575">Belay / recovery trace</text>
+    <path d="M43 81v163" stroke="#cad6e7" stroke-width="2"/>
+    <g transform="translate(0 80)">
+      <rect x="27" y="-16" width="32" height="32" rx="4" fill="#eff4fd" stroke="#8da8d3"/>
+      <path d="M38-9h10V9H38zM41-3h4M41 2h4" fill="none" stroke="#244cc8" stroke-width="1.5"/>
+      <text x="78" y="7" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#182c3b">Record</text>
+      <text x="317" y="5" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#536575">identity saved</text>
+    </g>
+    <g transform="translate(0 133)">
+      <rect x="27" y="-16" width="32" height="32" rx="4" fill="#eff4fd" stroke="#8da8d3"/>
+      <path d="M34 0h18m-6-6 6 6-6 6" fill="none" stroke="#244cc8" stroke-width="1.8"/>
+      <text x="78" y="7" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#182c3b">Pay</text>
+      <text x="317" y="5" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#536575">action sent</text>
+    </g>
+    <g transform="translate(0 186)">
+      <rect x="27" y="-16" width="32" height="32" rx="4" fill="#fdf0ed" stroke="#b95348"/>
+      <path d="m37-6 12 12m0-12L37 6" fill="none" stroke="#a5322d" stroke-width="1.8"/>
+      <text x="78" y="7" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#182c3b">Crash</text>
+      <text x="317" y="5" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#536575">process stops</text>
+    </g>
+    <g transform="translate(0 239)">
+      <rect x="27" y="-16" width="32" height="32" rx="4" fill="#eaf4ee" stroke="#78a88b"/>
+      <path d="m35 0 5 5 11-11" fill="none" stroke="#226047" stroke-width="1.8"/>
+      <text x="78" y="7" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#182c3b">Recover</text>
+      <text x="317" y="5" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#536575">evidence checked</text>
+    </g>
+  </g>
+</svg>

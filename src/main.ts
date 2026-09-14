@@ -1,320 +1,190 @@
-import "./style.css";
+// All portfolio content and final metrics are present in the HTML. JavaScript
+// adds controls only after their handlers are attached; it never loads copy.
+function initDisclosures() {
+  document.querySelectorAll<HTMLButtonElement>(".disclosure-toggle[aria-controls]")
+    .forEach((button) => {
+      const panelId = button.getAttribute("aria-controls");
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel?.hasAttribute("data-disclosure-panel")) return;
 
-const isTouch = window.matchMedia("(hover: none)").matches;
+      const setExpanded = (expanded: boolean) => {
+        button.setAttribute("aria-expanded", String(expanded));
+        panel.hidden = !expanded;
+      };
 
-/* ------------------------------------------------------------------ */
-/* Custom cursor                                                       */
-/* ------------------------------------------------------------------ */
-function initCursor() {
-  if (isTouch) return;
-
-  const dot = document.getElementById("cursorDot")!;
-  const ring = document.getElementById("cursorRing")!;
-  const label = document.getElementById("cursorLabel")!;
-
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
-
-  window.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    dot.style.left = `${mouseX}px`;
-    dot.style.top = `${mouseY}px`;
-  });
-
-  function raf() {
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-    ring.style.left = `${ringX}px`;
-    ring.style.top = `${ringY}px`;
-    requestAnimationFrame(raf);
-  }
-  raf();
-
-  window.addEventListener("mousedown", () => ring.classList.add("is-down"));
-  window.addEventListener("mouseup", () => ring.classList.remove("is-down"));
-
-  document.addEventListener("mouseover", (e) => {
-    const target = (e.target as HTMLElement).closest("[data-cursor]") as HTMLElement | null;
-    if (!target) return;
-    const kind = target.dataset.cursor;
-    if (kind === "link") {
-      ring.classList.add("is-link");
-    } else if (kind === "view") {
-      ring.classList.add("is-view");
-      label.textContent = "View";
-    }
-  });
-  document.addEventListener("mouseout", (e) => {
-    const target = (e.target as HTMLElement).closest("[data-cursor]") as HTMLElement | null;
-    if (!target) return;
-    ring.classList.remove("is-link", "is-view");
-    label.textContent = "";
-  });
-
-  window.addEventListener("mouseleave", () => {
-    dot.style.opacity = "0";
-    ring.style.opacity = "0";
-  });
-  window.addEventListener("mouseenter", () => {
-    dot.style.opacity = "1";
-    ring.style.opacity = "1";
-  });
-}
-
-/* ------------------------------------------------------------------ */
-/* Particle network background                                         */
-/* ------------------------------------------------------------------ */
-function initParticles() {
-  const canvas = document.getElementById("bg-canvas") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d")!;
-  let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-  interface P { x: number; y: number; vx: number; vy: number; r: number; }
-  let particles: P[] = [];
-  let mouse = { x: -9999, y: -9999 };
-
-  function resize() {
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    canvas.style.width = `${w}px`;
-    canvas.style.height = `${h}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const count = Math.min(90, Math.floor((w * h) / 16000));
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      r: Math.random() * 1.6 + 0.6,
-    }));
-  }
-
-  window.addEventListener("resize", resize);
-  window.addEventListener("mousemove", (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
-  window.addEventListener("mouseleave", () => { mouse.x = -9999; mouse.y = -9999; });
-
-  const maxDist = 130;
-
-  function tick() {
-    ctx.clearRect(0, 0, w, h);
-
-    for (const p of particles) {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > w) p.vx *= -1;
-      if (p.y < 0 || p.y > h) p.vy *= -1;
-
-      const dx = mouse.x - p.x;
-      const dy = mouse.y - p.y;
-      const d2 = dx * dx + dy * dy;
-      if (d2 < 22500) {
-        const d = Math.sqrt(d2) || 1;
-        const force = (150 - d) / 150;
-        p.x -= (dx / d) * force * 1.1;
-        p.y -= (dy / d) * force * 1.1;
-      }
-    }
-
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const a = particles[i], b = particles[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * 0.35;
-          ctx.strokeStyle = `rgba(170, 120, 255, ${alpha})`;
-          ctx.lineWidth = 0.6;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    for (const p of particles) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(200, 168, 255, 0.75)";
-      ctx.fill();
-    }
-
-    requestAnimationFrame(tick);
-  }
-
-  resize();
-  tick();
-}
-
-/* ------------------------------------------------------------------ */
-/* Scroll reveal                                                       */
-/* ------------------------------------------------------------------ */
-function initReveal() {
-  const els = document.querySelectorAll<HTMLElement>(".reveal");
-  els.forEach((el) => {
-    const delay = el.dataset.delay;
-    if (delay) el.style.setProperty("--d", delay);
-  });
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-          io.unobserve(entry.target);
-        }
+      button.addEventListener("click", () => {
+        setExpanded(button.getAttribute("aria-expanded") !== "true");
       });
+
+      setExpanded(false);
+      button.hidden = false;
+    });
+}
+
+function initNavigation() {
+  const header = document.getElementById("site-header");
+  const button = document.querySelector<HTMLButtonElement>("#nav-toggle");
+  const navigation = document.getElementById("primary-navigation");
+  if (!header || !button || !navigation) return;
+
+  const setExpanded = (expanded: boolean) => {
+    button.setAttribute("aria-expanded", String(expanded));
+    header.dataset.navOpen = String(expanded);
+  };
+
+  button.addEventListener("click", () => {
+    setExpanded(button.getAttribute("aria-expanded") !== "true");
+  });
+
+  navigation.addEventListener("click", (event) => {
+    if (event.target instanceof Element && event.target.closest("a")) {
+      // Leave anchor navigation and focus to the browser, including desktop.
+      setExpanded(false);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || button.getAttribute("aria-expanded") !== "true") return;
+    setExpanded(false);
+    // CSS hides the toggle on desktop; never focus a hidden control.
+    if (button.getClientRects().length) button.focus();
+    event.preventDefault();
+  });
+
+  setExpanded(false);
+  header.classList.add("nav-enhanced");
+  button.hidden = false;
+}
+
+function initRecoveryDemo() {
+  const demo = document.getElementById("recovery-demo");
+  const run = document.querySelector<HTMLButtonElement>("#demo-run");
+  const reset = document.querySelector<HTMLButtonElement>("#demo-reset");
+  const status = document.getElementById("demo-status");
+  const title = document.getElementById("demo-title");
+  const caption = document.getElementById("demo-caption");
+  const stageTrack = document.getElementById("demo-stage-track");
+  const trace = document.getElementById("demo-trace");
+  if (!demo || !run || !reset || !status || !title || !caption || !stageTrack || !trace) return;
+
+  const stages = ["anchor", "payment", "crash", "recovery"] as const;
+  type Stage = typeof stages[number];
+  const copy: Record<Stage, { title: string; caption: string; status: string }> = {
+    anchor: {
+      title: "Identity saved.",
+      caption: "A stable action ID is written to the journal before the agent decides.",
+      status: "Step 1 of 4: action identity is durably recorded.",
     },
-    { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
-  );
-  els.forEach((el) => io.observe(el));
-}
-
-/* ------------------------------------------------------------------ */
-/* Count-up numbers                                                    */
-/* ------------------------------------------------------------------ */
-function initCounters() {
-  const nums = document.querySelectorAll<HTMLElement>("[data-count]");
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target as HTMLElement;
-        const target = parseFloat(el.dataset.count!);
-        const suffix = el.dataset.suffix || "";
-        const prefix = el.dataset.prefix || "";
-        const isDecimal = el.dataset.count!.includes(".");
-        const duration = 1400;
-        const start = performance.now();
-
-        function frame(now: number) {
-          const t = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - t, 3);
-          const val = target * eased;
-          const shown = isDecimal ? val.toFixed(2) : Math.round(val).toLocaleString("en-US");
-          el.textContent = prefix + shown + suffix;
-          if (t < 1) requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-        io.unobserve(el);
-      });
+    payment: {
+      title: "The payment goes through.",
+      caption: "The provider commits the payment. The agent has not recorded its receipt yet.",
+      status: "Step 2 of 4: one payment commits at the provider.",
     },
-    { threshold: 0.6 }
-  );
-  nums.forEach((el) => io.observe(el));
-}
+    crash: {
+      title: "Then the process crashes.",
+      caption: "The receipt is missing, but the original action ID survives in the journal.",
+      status: "Step 3 of 4: the process stops before recording confirmation.",
+    },
+    recovery: {
+      title: "One payment. Recovered.",
+      caption: "Recovery checks the original action against provider evidence and confirms the payment without sending another.",
+      status: "Illustration complete: the original payment is confirmed. No duplicate payment is sent.",
+    },
+  };
 
-/* ------------------------------------------------------------------ */
-/* Role accordions                                                     */
-/* ------------------------------------------------------------------ */
-function initAccordions() {
-  document.querySelectorAll<HTMLButtonElement>(".role-toggle").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const card = btn.closest(".role-card")!;
-      const open = card.classList.toggle("is-open");
-      btn.setAttribute("aria-expanded", String(open));
-    });
-  });
-}
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const timers = new Set<number>();
+  let running = false;
 
-/* ------------------------------------------------------------------ */
-/* Tilt cards                                                          */
-/* ------------------------------------------------------------------ */
-function initTilt() {
-  if (isTouch) return;
-  const cards = document.querySelectorAll<HTMLElement>("[data-tilt]");
-  cards.forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const rx = ((y / rect.height) - 0.5) * -6;
-      const ry = ((x / rect.width) - 0.5) * 6;
-      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
-    });
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "";
-    });
-  });
-}
+  const cancelTimers = () => {
+    timers.forEach((timer) => window.clearTimeout(timer));
+    timers.clear();
+  };
 
-/* ------------------------------------------------------------------ */
-/* Education card glow follows mouse                                   */
-/* ------------------------------------------------------------------ */
-function initSpotlight() {
-  if (isTouch) return;
-  const card = document.querySelector<HTMLElement>(".edu-card");
-  if (!card) return;
-  card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
-    card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-    card.style.setProperty("--my", `${e.clientY - rect.top}px`);
-  });
-}
+  const setRunning = (value: boolean) => {
+    running = value;
+    demo.dataset.running = String(value);
+    run.disabled = value;
+  };
 
-/* ------------------------------------------------------------------ */
-/* Nav: scroll state + mobile toggle + progress bar                    */
-/* ------------------------------------------------------------------ */
-function initNav() {
-  const nav = document.getElementById("nav")!;
-  const progress = document.getElementById("progressBar")!;
-
-  function onScroll() {
-    nav.classList.toggle("scrolled", window.scrollY > 20);
-    const h = document.documentElement;
-    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
-    progress.style.width = `${Math.min(100, Math.max(0, scrolled * 100))}%`;
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  const toggle = document.getElementById("navToggle");
-  const links = document.querySelector(".nav-links");
-  toggle?.addEventListener("click", () => {
-    links?.classList.toggle("mobile-open");
-    if (links?.classList.contains("mobile-open")) {
-      Object.assign((links as HTMLElement).style, {
-        display: "flex",
-        flexDirection: "column",
-        position: "fixed",
-        top: "64px",
-        right: "20px",
-        background: "rgba(10,6,18,0.96)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        borderRadius: "16px",
-        padding: "12px",
-        backdropFilter: "blur(16px)",
+  const markStages = (current: number, complete: boolean) => {
+    stages.forEach((stage, index) => {
+      const state = index < current || (complete && index === current)
+        ? "complete" : index === current ? "active" : "pending";
+      const nodes = [
+        stageTrack.querySelector<HTMLElement>(`.trace-step[data-stage="${stage}"]`),
+        trace.querySelector<HTMLElement>(`[data-trace="${stage}"]`),
+      ];
+      nodes.forEach((node) => {
+        if (!node) return;
+        node.dataset.status = state;
+        if (state === "active") node.setAttribute("aria-current", "step");
+        else node.removeAttribute("aria-current");
       });
-    } else {
-      (links as HTMLElement).style.display = "";
+    });
+  };
+
+  const showStage = (stage: Stage) => {
+    demo.dataset.state = stage;
+    title.textContent = copy[stage].title;
+    caption.textContent = copy[stage].caption;
+    status.textContent = copy[stage].status;
+    markStages(stages.indexOf(stage), stage === "recovery");
+  };
+
+  const finish = () => {
+    cancelTimers();
+    setRunning(false);
+    showStage("recovery");
+    run.textContent = "Run again";
+  };
+
+  const showReady = () => {
+    cancelTimers();
+    setRunning(false);
+    demo.dataset.state = "ready";
+    title.textContent = "One action. A durable record.";
+    caption.textContent = "Follow one action through a saved identity, a payment, an interruption, and recovery.";
+    status.textContent = "Ready to run the crash scenario.";
+    run.textContent = "Run crash test";
+    markStages(-1, false);
+  };
+
+  // This is a predetermined explanation of one recovery path, not a runtime
+  // benchmark. No model, payment API, or external service is called. The HTML's
+  // 'Payments after recovery' value remains 1 throughout this illustration.
+  run.addEventListener("click", () => {
+    if (running) return;
+    cancelTimers();
+    if (reducedMotion.matches) {
+      finish();
+      return;
     }
+
+    setRunning(true);
+    showStage("anchor");
+    const schedule = (delay: number, action: () => void) => {
+      const timer = window.setTimeout(() => {
+        timers.delete(timer);
+        action();
+      }, delay);
+      timers.add(timer);
+    };
+    schedule(900, () => showStage("payment"));
+    schedule(1850, () => showStage("crash"));
+    schedule(3200, finish);
   });
 
-  document.querySelectorAll(".nav-links a").forEach((a) => {
-    a.addEventListener("click", () => {
-      links?.classList.remove("mobile-open");
-      (links as HTMLElement).style.display = "";
-    });
+  reset.addEventListener("click", showReady);
+  reducedMotion.addEventListener("change", () => {
+    if (reducedMotion.matches && running) finish();
   });
+
+  showReady();
+  run.hidden = false;
+  reset.hidden = false;
 }
 
-/* ------------------------------------------------------------------ */
-/* Init                                                                 */
-/* ------------------------------------------------------------------ */
-initCursor();
-initParticles();
-initReveal();
-initCounters();
-initTilt();
-initAccordions();
-initSpotlight();
-initNav();
+initDisclosures();
+initNavigation();
+initRecoveryDemo();

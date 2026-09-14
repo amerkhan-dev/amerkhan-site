@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://amerkhan.vercel.app/sitemap.xml
