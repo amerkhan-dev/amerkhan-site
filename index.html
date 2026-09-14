@@ -1,496 +1,307 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Amer Khan — Software & AI Engineer. CS & Mathematics at UConn." />
-    <title>Amer Khan — Software & AI Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050308">
+    <title>Amer Khan | Software, AI &amp; Systems</title>
+    <meta name="description" content="Amer Khan builds AI agents, full-stack products, and reliable systems. Computer Science &amp; Engineering at UConn, with a mathematics minor. Explore Belay, Twinly, and Tend.">
+    <link rel="canonical" href="https://amerkhan.vercel.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amerkhan.vercel.app/">
+    <meta property="og:site_name" content="Amer Khan">
+    <meta property="og:title" content="Amer Khan | Software &amp; AI Engineer">
+    <meta property="og:description" content="AI agents, software, and the systems beneath them. CS &amp; Engineering at UConn. Explore my work in agent reliability and full-stack engineering.">
+    <meta property="og:image" content="https://amerkhan.vercel.app/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Amer Khan. Software & AI Engineer. Built for the unexpected.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Amer Khan | Software &amp; AI Engineer">
+    <meta name="twitter:description" content="AI agents, software, and the systems beneath them. CS &amp; Engineering at UConn.">
+    <meta name="twitter:image" content="https://amerkhan.vercel.app/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preload" href="/node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="/node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="/node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="stylesheet" href="/src/style.css">
   </head>
-  <body>
-    <!-- custom cursor -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"><span class="cursor-label" id="cursorLabel"></span></div>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
+  <div class="ambient-scene" aria-hidden="true"><div class="glow glow-a"></div><div class="glow glow-b"></div><div class="glow glow-c"></div><div class="starfield"></div><div class="signal-orbit orbit-one"></div><div class="signal-orbit orbit-two"></div></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div id="app">
+    <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+    <header class="nav" id="site-header">
+      <a class="nav-brand" href="#home" aria-label="AK. — Amer Khan, home" data-cursor="link">AK<span class="dot">.</span></a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" hidden>Menu <span aria-hidden="true">+</span></button>
+      <nav class="nav-links" id="primary-navigation" aria-label="Main navigation">
+        <a href="#education" data-cursor="link">Education</a><a href="#experience" data-cursor="link">Experience</a><a href="#projects" data-cursor="link">Projects</a><a href="#skills" data-cursor="link">Skills</a><a href="#contact" data-cursor="link">Contact <span class="arrow" aria-hidden="true">↗</span></a>
+      </nav>
+      <a class="nav-cta" href="mailto:amer.khan@uconn.edu" data-cursor="link">Let's talk <span aria-hidden="true">↗</span></a>
+    </header>
+    <main id="main">
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Available for Summer 2027 internships</p>
+          <h1 class="hero-title" id="hero-title"><span class="line hero-name">Amer Khan<span class="name-spark" aria-hidden="true">✳</span></span><span class="line hero-sub">Software &amp; <span class="grad-text">AI</span> Engineer</span></h1>
+          <div class="hero-desc"><p class="hero-punch">I build AI agents, software, and the <span class="grad-text">systems beneath them.</span></p><p class="hero-support">From the first decision to the last mile. Built for the unexpected.</p><p class="hero-meta"><span aria-hidden="true">🎓</span> Computer Science &amp; Engineering + Mathematics minor<br /><span class="hl">UConn College of Engineering</span>, class of 2028</p></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#projects" data-cursor="link">Explore my work <span class="arrow" aria-hidden="true">↘</span></a><a class="btn btn-ghost" href="mailto:amer.khan@uconn.edu" data-cursor="link">Say hello <span class="arrow" aria-hidden="true">↗</span></a></div>
+          <div class="hero-stats" aria-label="At a glance"><div class="hstat"><span class="hstat-num stat-value" data-counter>3.94</span><span class="hstat-label">GPA in CS &amp; math coursework</span></div><div class="hstat-sep" aria-hidden="true"></div><div class="hstat"><span class="hstat-num stat-value" data-counter>50+</span><span class="hstat-label">Production AI-agent use cases shipped</span></div><div class="hstat-sep" aria-hidden="true"></div><div class="hstat"><span class="hstat-num stat-value" data-counter>2,000+</span><span class="hstat-label">Twinly followers, grown from zero</span></div></div>
+        </div>
+        <a class="scroll-cue" href="#numbers" aria-label="Explore the numbers" data-cursor="link"><span>Keep exploring</span><span aria-hidden="true">↓</span></a>
+      </section>
+      <section class="numbers-section" id="numbers" aria-labelledby="numbers-title"><div class="numbers-inner"><h2 class="numbers-eyebrow" id="numbers-title"><span aria-hidden="true">📊</span> By the numbers</h2><div class="numbers-grid">
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>3.94</span><span class="numbers-label">GPA in CS &amp; math coursework</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>50+</span><span class="numbers-label">Production AI-agent use cases</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>2,000+</span><span class="numbers-label">Twinly followers, from zero</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value">Top 10%</span><span class="numbers-label">Y Combinator cohort, two batches</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>$15K</span><span class="numbers-label">FinTech budget directed</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>45+</span><span class="numbers-label">TwinTrack contributors, daily</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>300+</span><span class="numbers-label">Students supported, three lab sections</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>20,000</span><span class="numbers-label">Students on the campus network</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>200+</span><span class="numbers-label">Original Python lessons authored</span></div>
+      </div></div></section>
+      <section class="section" id="education" aria-labelledby="education-title"><div class="section-head"><p class="section-tag"><span aria-hidden="true">🎓</span> Education</p><h2 id="education-title">Software. Systems.<br /><span class="grad-text">The math underneath.</span></h2></div><article class="edu-card" data-tilt>
+        <div class="edu-top"><div class="edu-school"><h3>University of Connecticut</h3><p>College of Engineering, Storrs, CT</p><p class="edu-degree">B.S.E. Computer Science &amp; Engineering, Mathematics Minor</p></div><div class="edu-badge"><span class="edu-badge-label">Expected</span><span class="edu-badge-value">May 2028</span></div></div>
+        <p class="education-intro">My work spans agent behavior, cloud applications, digital logic, and campus network infrastructure. I like understanding how the whole thing fits together.</p>
+        <div class="edu-gpa-row"><div class="gpa-tile gpa-tile-hero"><span class="gpa-num stat-value" data-counter>3.94</span><span class="gpa-label">GPA in CS &amp; math coursework</span></div><div class="gpa-tile gpa-tile-text"><span class="gpa-chip"><span aria-hidden="true">🏆</span> Husky Academic Scholarship</span><span class="gpa-chip-sub">Maximum merit award</span></div><div class="gpa-tile gpa-tile-text"><span class="gpa-chip"><span aria-hidden="true">🤖</span> Anthropic Academy</span><span class="gpa-chip-sub">Full certification</span></div></div>
+        <div class="coursework"><h4>Selected coursework</h4><ul class="course-chips"><li>Data Structures &amp; Object-Oriented Design</li><li>Systems Programming</li><li>Digital Logic Design</li><li>Applied Linear Algebra</li><li>Multivariable Calculus</li><li>Differential Equations</li><li>Cybersecurity Lab</li><li>Physics for Engineers I &amp; II</li></ul></div>
+      </article></section>
+      <section class="section" id="experience" aria-labelledby="experience-title">
+  <div class="section-head">
+    <p class="section-tag">⚡ Experience</p>
+    <h2 id="experience-title">Where I’ve <span class="grad-text">shipped.</span></h2>
+    <p class="section-note">Industry, campus infrastructure, and a lot of Python. Open a role for the details.</p>
+  </div>
 
-    <!-- background layers -->
-    <canvas id="bg-canvas"></canvas>
-    <div class="glow glow-a"></div>
-    <div class="glow glow-b"></div>
-    <div class="glow glow-c"></div>
-    <div class="noise"></div>
+  <div class="role-grid">
+    <article class="role-card">
+      <div class="role-top">
+        <span class="role-badge role-badge-startup">🚀 AI Startup</span>
+        <span class="role-period">Jun–Sep 2026</span>
+      </div>
+      <h3>Software &amp; AI Engineer, Core Team</h3>
+      <p class="role-org">Twinly</p>
+      <p class="role-hook">Shipped 50+ production AI-agent use cases, owned desktop releases, and grew the product from zero to 2,000+ followers and 300+ active users.</p>
+      <button class="disclosure-toggle" hidden type="button" aria-expanded="false" aria-controls="twinly-details" aria-label="Role details for Twinly" data-cursor="link">Role details <span aria-hidden="true">↗</span></button>
+      <div class="disclosure-panel" id="twinly-details" data-disclosure-panel>
+        <ul class="detail-list">
+          <li>Built and QAed 4–5 use cases a week across multi-step workflows, tool calling, LLM integration, prompt architecture, and real-time voice cloning.</li>
+          <li>Owned 50+ macOS and Windows builds, debugging Swift clients, TypeScript services, and Python agent backends.</li>
+          <li>Traced failed agent runs, added regression coverage across every production tool-call path, and tightened retry logic against a scenario-based evaluation harness.</li>
+          <li>Pitched product and architecture to venture firms including Underscore VC. The team ranked in the top 10% of its Y Combinator cohort, two batches running.</li>
+        </ul>
+        <p class="role-tools">Python · TypeScript · Swift · Agent evaluation · LLM integration · Voice cloning</p>
+      </div>
+    </article>
 
-    <div id="app">
-      <div class="progress-bar" id="progressBar"></div>
+    <article class="role-card">
+      <div class="role-top">
+        <span class="role-badge role-badge-corp">🏥 NEXT Program</span>
+        <span class="role-period">May–Aug 2026</span>
+      </div>
+      <h3>Software Engineer, NEXT Program</h3>
+      <p class="role-org">The Cigna Group</p>
+      <p class="role-hook">Led a four-person team building Tend, a three-tier AWS application. Named best team in a cohort of 10+ and presented the architecture and product strategy to Cigna executives.</p>
+      <button class="disclosure-toggle" hidden type="button" aria-expanded="false" aria-controls="cigna-details" aria-label="Role details for Cigna" data-cursor="link">Role details <span aria-hidden="true">↗</span></button>
+      <div class="disclosure-panel" id="cigna-details" data-disclosure-panel>
+        <ul class="detail-list">
+          <li>Shipped a React frontend and 10+ Node.js REST endpoints using Lambda and DynamoDB, with Elastic Beanstalk and CloudFront. Added auto-scaling and CDN caching beyond the program scope.</li>
+          <li>Owned frontend and backend delivery, prototyped the data layer in SQLite, migrated it to DynamoDB, and built Pip, the in-app AI agent.</li>
+          <li>Ran code review with Cigna engineers and owned the pull-request pipeline through a 12-week delivery cycle.</li>
+        </ul>
+        <p class="role-tools">React · Node.js · AWS Lambda · DynamoDB · Elastic Beanstalk · CloudFront</p>
+      </div>
+    </article>
 
-      <header class="nav" id="nav">
-        <a href="#home" class="nav-brand" data-cursor="link">AK<span class="dot">.</span></a>
-        <nav class="nav-links">
-          <a href="#education" data-cursor="link"><span>01</span>Education</a>
-          <a href="#experience" data-cursor="link"><span>02</span>Experience</a>
-          <a href="#projects" data-cursor="link"><span>03</span>Projects</a>
-          <a href="#skills" data-cursor="link"><span>04</span>Skills</a>
-          <a href="#contact" data-cursor="link"><span>05</span>Contact</a>
-        </nav>
-        <a class="nav-cta" href="#contact" data-cursor="link">Let's talk</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-      </header>
+    <article class="role-card">
+      <div class="role-top">
+        <span class="role-badge">📈 UConn FinTech</span>
+        <span class="role-period">Fall 2025–Present</span>
+      </div>
+      <h3>Chief Technology Officer</h3>
+      <p class="role-org">UConn FinTech Club</p>
+      <p class="role-hook">Direct a $15,000 annual university budget, build the technical curriculum, and prepare teams for quant finance and trading competitions.</p>
+      <button class="disclosure-toggle" hidden type="button" aria-expanded="false" aria-controls="fintech-details" aria-label="Role details for UConn FinTech Club" data-cursor="link">Role details <span aria-hidden="true">↗</span></button>
+      <div class="disclosure-panel" id="fintech-details" data-disclosure-panel>
+        <ul class="detail-list">
+          <li>Allocate the club’s $15,000 annual university budget across programming, competition entries, and student project teams.</li>
+          <li>Own and teach the technical curriculum: linear algebra, machine learning, and predictive modeling applied to financial markets.</li>
+          <li>Build and mentor teams for quant finance and trading competitions, connecting the club’s technical curriculum with competition work.</li>
+          <li>Extended a coursework poker equity and expected-value simulator into a probability sandbox for the club’s quant curriculum, using Monte Carlo simulation in Python and NumPy.</li>
+        </ul>
+        <p class="role-tools">Python · NumPy · Machine learning · Predictive modeling · Linear algebra · Statistics</p>
+      </div>
+    </article>
 
-      <main>
-        <!-- HERO -->
-        <section class="hero" id="home">
-          <div class="hero-inner">
-            <p class="eyebrow reveal"><span class="pulse-dot"></span>Available for Summer 2027 internships</p>
-            <h1 class="hero-title">
-              <span class="line reveal">Amer Khan</span>
-              <span class="line hero-sub reveal" data-delay="1">Software &amp; <span class="grad-text">AI</span> Engineer</span>
-            </h1>
-            <div class="hero-desc reveal" data-delay="2">
-              <span class="hero-punch">I don't just build software — I build the <span class="grad-text">systems and hardware</span> it runs on, and it survives contact with real users.</span>
-              <span class="hero-meta">🎓 Computer Science <b>and</b> Engineering + Mathematics · <span class="hl">UConn College of Engineering</span></span>
-            </div>
-            <div class="hero-actions reveal" data-delay="3">
-              <a class="btn btn-primary" href="#projects" data-cursor="link">
-                <span>View Projects</span>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <a class="btn btn-ghost" href="mailto:amer.khan@uconn.edu" data-cursor="link">
-                <span>Get in touch</span>
-              </a>
-            </div>
+    <article class="role-card">
+      <div class="role-top">
+        <span class="role-badge">🔌 UConn ITS</span>
+        <span class="role-period">May 2026–Present</span>
+      </div>
+      <h3>Network Engineering &amp; Design Technician</h3>
+      <p class="role-org">UConn ITS</p>
+      <p class="role-hook">Design the physical side of campus connectivity: CAD layouts, cable routes, and fiber pathways for a network serving 20,000 students.</p>
+      <button class="disclosure-toggle" hidden type="button" aria-expanded="false" aria-controls="its-details" aria-label="Role details for UConn ITS" data-cursor="link">Role details <span aria-hidden="true">↗</span></button>
+      <div class="disclosure-panel" id="its-details" data-disclosure-panel>
+        <ul class="detail-list">
+          <li>Draft the CAD layouts engineers and contractors use to build campus network infrastructure, covering cable routes, rack placement, and pathway design.</li>
+          <li>Map fiber and copper routes across campus buildings and outside-plant pathways, documenting where the network’s physical connections run.</li>
+          <li>Work with senior engineers on installation planning, linking the pathway drawings to cable routing and equipment placement.</li>
+          <li>Support on-call response alongside senior engineers, contributing to the operational side of the same campus network.</li>
+        </ul>
+        <p class="role-tools">CAD · Network design · Fiber and copper routing · Excel</p>
+      </div>
+    </article>
 
-            <div class="hero-stats reveal" data-delay="4">
-              <div class="hstat">
-                <span class="hstat-num" data-count="3.94">0.00</span>
-                <span class="hstat-label">GPA in CS &amp; Math coursework</span>
-              </div>
-              <div class="hstat-sep"></div>
-              <div class="hstat">
-                <span class="hstat-num" data-count="50" data-suffix="+">0</span>
-                <span class="hstat-label">Production AI agents shipped</span>
-              </div>
-              <div class="hstat-sep"></div>
-              <div class="hstat">
-                <span class="hstat-num" data-count="2000" data-suffix="+">0</span>
-                <span class="hstat-label">Twinly followers, from zero</span>
-              </div>
-            </div>
-          </div>
+    <article class="role-card">
+      <div class="role-top">
+        <span class="role-badge">🐾 UConn Teaching</span>
+        <span class="role-period">Aug 2026–Present</span>
+      </div>
+      <h3>Undergraduate Teaching Assistant, CSE 1010</h3>
+      <p class="role-org">University of Connecticut</p>
+      <p class="role-hook">Lead three lab sections and support 300+ students learning Python through lab instruction, office hours, and one-on-one mentoring.</p>
+      <button class="disclosure-toggle" hidden type="button" aria-expanded="false" aria-controls="teaching-details" aria-label="Role details for CSE 1010 teaching assistant" data-cursor="link">Role details <span aria-hidden="true">↗</span></button>
+      <div class="disclosure-panel" id="teaching-details" data-disclosure-panel>
+        <ul class="detail-list">
+          <li>Selected as one of very few second-year teaching assistants after earning an A in CSE 1010.</li>
+          <li>Lead three lab sections for 300+ students, teaching introductory Python through hands-on lab instruction.</li>
+          <li>Hold office hours and provide one-on-one Python mentoring, giving students individual support alongside the scheduled labs.</li>
+          <li>Grade coursework as part of the teaching team, supporting students across instruction, practice, and assessment.</li>
+        </ul>
+        <p class="role-tools">Python · Lab instruction · Office hours · Grading · Mentoring</p>
+      </div>
+    </article>
 
-          <a href="#education" class="scroll-cue" data-cursor="link" aria-label="Scroll down">
-            <span>Scroll</span>
-            <div class="scroll-cue-line"><i></i></div>
-          </a>
-        </section>
+    <article class="role-card">
+      <div class="role-top">
+        <span class="role-badge role-badge-alt">🔥 Firefly Coders</span>
+        <span class="role-period">May–Aug 2024</span>
+      </div>
+      <h3>Python Instructor</h3>
+      <p class="role-org">Firefly Coders</p>
+      <p class="role-hook">Wrote 200+ original lessons and taught 100+ students, ages 5–15.</p>
+      <button class="disclosure-toggle" hidden type="button" aria-expanded="false" aria-controls="firefly-details" aria-label="Role details for Firefly Coders" data-cursor="link">Role details <span aria-hidden="true">↗</span></button>
+      <div class="disclosure-panel" id="firefly-details" data-disclosure-panel>
+        <ul class="detail-list">
+          <li>Authored the full Python curriculum before starting college, covering core syntax through recursion and object-oriented design.</li>
+          <li>Adapted lessons to a wide range of ages and skill levels.</li>
+        </ul>
+        <p class="role-tools">Python · Curriculum design · Teaching</p>
+      </div>
+    </article>
+  </div>
+</section>
 
-        <!-- BY THE NUMBERS -->
-        <section class="numbers-section" id="numbers">
-          <div class="numbers-inner reveal">
-            <p class="numbers-eyebrow"><span class="numbers-dot"></span>📊 By the Numbers</p>
-            <div class="numbers-divider"></div>
-            <div class="numbers-grid">
-              <div class="numbers-item">
-                <span class="numbers-value" data-count="3.94">0.00</span>
-                <span class="numbers-label">GPA, programming &amp; math</span>
-              </div>
-              <div class="numbers-item">
-                <span class="numbers-value" data-count="50" data-suffix="+">0</span>
-                <span class="numbers-label">Production AI agents shipped</span>
-              </div>
-              <div class="numbers-item">
-                <span class="numbers-value" data-count="2000" data-suffix="+">0</span>
-                <span class="numbers-label">Twinly followers, from zero</span>
-              </div>
-              <div class="numbers-item">
-                <span class="numbers-value">Top 10%</span>
-                <span class="numbers-label">Y Combinator cohort, 2 batches</span>
-              </div>
-              <div class="numbers-item">
-                <span class="numbers-value" data-count="15" data-prefix="$" data-suffix="K">$0K</span>
-                <span class="numbers-label">FinTech budget directed</span>
-              </div>
-              <div class="numbers-item">
-                <span class="numbers-value" data-count="45" data-suffix="+">0</span>
-                <span class="numbers-label">TwinTrack contributors, daily</span>
-              </div>
-              <div class="numbers-item">
-                <span class="numbers-value" data-count="300" data-suffix="+">0</span>
-                <span class="numbers-label">Students led, 3 lab sections</span>
-              </div>
-              <div class="numbers-item">
-                <span class="numbers-value" data-count="20000" data-suffix="+">0</span>
-                <span class="numbers-label">Students on the network</span>
-              </div>
-              <div class="numbers-item">
-                <span class="numbers-value" data-count="200" data-suffix="+">0</span>
-                <span class="numbers-label">Python lessons authored</span>
-              </div>
-            </div>
-          </div>
-        </section>
+      <section class="section" id="projects" aria-labelledby="projects-title"><div class="section-head"><p class="section-tag"><span aria-hidden="true">🛠️</span> Projects</p><h2 id="projects-title">Ideas, <span class="grad-text">put under load.</span></h2><p class="section-note">Built, shipped, and tested beyond the happy path. Open a card's notes for the details.</p></div>
+        <div class="projects-grid">
+          <article class="project-card" id="belay" aria-labelledby="belay-title" data-tilt><div class="project-glow" aria-hidden="true"></div><div class="project-top"><span class="project-category">Agent reliability</span><span class="project-year">2026</span></div><h3 id="belay-title"><span aria-hidden="true">🧗</span> Belay</h3><p class="project-sub">Durable execution for AI agent actions</p><p class="project-desc">Crash recovery for agents making payments. Record an action's identity before the model decides, then verify what happened before retrying.</p><ul class="project-tags" aria-label="Belay skills"><li>Python</li><li>Crash recovery</li><li>Durable execution</li><li>Evidence adjudication</li></ul><div class="project-links"><a class="project-link" href="https://github.com/Frank-7/Belay" target="_blank" rel="noopener noreferrer" data-cursor="view">Source code <span class="arrow" aria-hidden="true">↗</span></a><a class="project-link project-link-alt" href="https://frank-7.github.io/Belay/" target="_blank" rel="noopener noreferrer" data-cursor="view">Walkthrough <span class="arrow" aria-hidden="true">↗</span></a></div><button class="disclosure-toggle" hidden type="button" aria-controls="belay-details" aria-expanded="false" aria-label="Build notes for Belay">Build notes <span aria-hidden="true">↗</span></button><div class="disclosure-panel" id="belay-details" data-disclosure-panel><p class="project-detail-intro">I led the architecture, build, and pitch with a three-person team at the East v. West Hackathon, September 12–14, 2026. The event offered a $1M+ prize pool; awards are pending.</p><ul class="detail-list">
+                  <li><strong>Built the evidence-adjudication layer:</strong> five modules and 65 assertions resolving escalated cases from out-of-band records. Zero false resolutions in 200 graded cases, against 13 for an unvalidated control, closing 90 previously unrecoverable halts.</li>
+                  <li><strong>Measured the assumption:</strong> ran the project's first live model-divergence experiment, with 250+ API calls across five experimental blocks. Observed no decision divergence in those settings and published the null result.</li>
+                  <li><strong>Found and fixed two high-severity defects:</strong> torn-journal-tail data loss and an interrupted-allocation KeyError after money had moved in the simulation. Thirteen of 15 new regression tests failed on unfixed main.</li>
+                  <li><strong>Re-verified the headline result:</strong> zero contract violations in 240 anchored-runtime trials, within a 960-trial comparison using real process kills.</li>
+                </ul><p class="project-detail-note">Results from controlled, synthetic-payment experiments. When evidence cannot establish what happened, Belay stops for review.</p><a class="project-link" href="https://github.com/Frank-7/Belay/blob/main/FINDINGS.md" target="_blank" rel="noopener noreferrer" data-cursor="view">Read the findings <span class="arrow" aria-hidden="true">↗</span></a></div></article>
+          <article class="project-card" id="tend" aria-labelledby="tend-title" data-tilt><div class="project-glow" aria-hidden="true"></div><div class="project-top"><span class="project-category">Full-stack &amp; cloud</span><span class="project-year">2026</span></div><h3 id="tend-title"><span aria-hidden="true">🌱</span> Tend</h3><p class="project-sub">Mental health support, built with The Cigna Group</p><p class="project-desc">A three-tier AWS application for habit tracking, adaptive check-ins, conversational scheduling, and focus blocking, with Pip, an in-app AI agent.</p><ul class="project-tags" aria-label="Tend skills"><li>React</li><li>AWS Lambda</li><li>DynamoDB</li><li>AI agent</li></ul><div class="project-links"><a class="project-link" href="https://github.com/amerkhan-dev/Tend" target="_blank" rel="noopener noreferrer" data-cursor="view">Source code <span class="arrow" aria-hidden="true">↗</span></a></div><button class="disclosure-toggle" hidden type="button" aria-controls="tend-details" aria-expanded="false" aria-label="Build notes for Tend">Build notes <span aria-hidden="true">↗</span></button><div class="disclosure-panel" id="tend-details" data-disclosure-panel><ul class="detail-list"><li>Led a four-person team through a 12-week delivery cycle. Named best team in a Cigna NEXT cohort of 10+ and presented the architecture and product strategy to executives.</li><li>Built the React frontend and 10+ Node.js REST endpoints with Lambda and DynamoDB. Added Elastic Beanstalk, CloudFront, auto-scaling, and CDN caching beyond the program scope.</li><li>Prototyped the data layer in SQLite, migrated to DynamoDB, and built Pip to support the in-app experience.</li></ul><div class="architecture-strip" aria-label="React to Node.js to AWS"><span>React</span><span aria-hidden="true">→</span><span>Node.js</span><span aria-hidden="true">→</span><span>AWS</span></div></div></article>
+          <article class="project-card" id="twintrack" aria-labelledby="twintrack-title" data-tilt><div class="project-glow" aria-hidden="true"></div><div class="project-top"><span class="project-category">Team tooling</span><span class="project-year">2026</span></div><h3 id="twintrack-title"><span aria-hidden="true">🗂️</span> TwinTrack</h3><p class="project-sub">The work behind a team that ships</p><p class="project-desc">Co-designed and built the task-management platform 45+ Twinly contributors use daily for assignments, deadlines, and GitHub pull-request review.</p><ul class="project-tags" aria-label="TwinTrack skills"><li>Full-stack</li><li>GitHub API</li><li>Team tooling</li></ul><div class="project-links"><a class="project-link" href="https://twintrack.twinly.tech" target="_blank" rel="noopener noreferrer" data-cursor="view">Visit TwinTrack <span class="arrow" aria-hidden="true">↗</span></a></div><button class="disclosure-toggle" hidden type="button" aria-controls="twintrack-details" aria-expanded="false" aria-label="Build notes for TwinTrack">Build notes <span aria-hidden="true">↗</span></button><div class="disclosure-panel" id="twintrack-details" data-disclosure-panel><ul class="detail-list"><li>Co-designed the full-stack platform and shipped it for Twinly's summer internship cohort, across 200+ commits.</li><li>Brought task assignment, deadline tracking, and GitHub pull-request review into the daily workflow for 45+ contributors.</li></ul><div class="architecture-strip" aria-label="Assign to build to review"><span>Assign</span><span aria-hidden="true">→</span><span>Build</span><span aria-hidden="true">→</span><span>Review</span></div></div></article>
+          <article class="project-card" id="poker" aria-labelledby="poker-title" data-tilt><div class="project-glow" aria-hidden="true"></div><div class="project-top"><span class="project-category">Simulation &amp; probability</span><span class="project-year">2025</span></div><h3 id="poker-title"><span aria-hidden="true">♠️</span> Poker Equity &amp; EV Simulator</h3><p class="project-sub">A probability sandbox for the FinTech Club</p><p class="project-desc">Monte Carlo hand-equity and expected-value analysis. Built for coursework, then extended into the FinTech Club's quant curriculum.</p><ul class="project-tags" aria-label="Poker simulator skills"><li>Python</li><li>NumPy</li><li>Monte Carlo</li><li>Probability</li></ul><div class="project-links"><span class="project-status">Coursework → quant finance</span></div><button class="disclosure-toggle" hidden type="button" aria-controls="poker-details" aria-expanded="false" aria-label="Build notes for Poker Equity and EV Simulator">Build notes <span aria-hidden="true">↗</span></button><div class="disclosure-panel" id="poker-details" data-disclosure-panel><ul class="detail-list"><li>Runs hand-equity and expected-value calculations across simulated ranges using Python and NumPy.</li><li>Extended the coursework engine into a sandbox for exploring probability and Monte Carlo methods in the FinTech Club's quant curriculum.</li></ul></div></article>
+        </div>
+      </section>
+      <section class="section" id="skills" aria-labelledby="skills-title"><div class="section-head"><p class="section-tag"><span aria-hidden="true">🧠</span> Skills</p><h2 id="skills-title">Tools of the <span class="grad-text">trade.</span></h2><p class="section-note">From the model's first decision to the hardware underneath.</p></div><div class="skills-grid">
+        <article class="skill-card" data-tilt><h3><span class="skill-icon" aria-hidden="true">💻</span> Languages</h3><ul class="tag-cloud"><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>Swift</li><li>C</li><li>C++</li><li>Java</li><li>SQL</li></ul></article>
+        <article class="skill-card" data-tilt><h3><span class="skill-icon" aria-hidden="true">🤖</span> AI &amp; evaluation</h3><ul class="tag-cloud"><li>Agent architecture</li><li>LLM integration</li><li>Tool calling</li><li>Agent evaluation</li><li>Prompt engineering</li><li>Voice cloning &amp; TTS</li><li>Machine learning</li></ul></article>
+        <article class="skill-card" data-tilt><h3><span class="skill-icon" aria-hidden="true">☁️</span> Frameworks &amp; cloud</h3><ul class="tag-cloud"><li>React</li><li>Node.js</li><li>REST APIs</li><li>AWS Lambda</li><li>EC2</li><li>RDS</li><li>DynamoDB</li><li>Elastic Beanstalk</li><li>CloudFront</li><li>Git &amp; CI/CD</li></ul></article>
+        <article class="skill-card" data-tilt><h3><span class="skill-icon" aria-hidden="true">🔌</span> Hardware &amp; systems</h3><ul class="tag-cloud"><li>Digital logic</li><li>Systems programming</li><li>CAD</li><li>Network design</li><li>Fiber &amp; copper routing</li><li>Linux</li><li>Durable execution</li><li>Crash recovery</li><li>Evidence adjudication</li><li>Regression testing</li></ul></article>
+      </div></section>
+      <section class="section contact-section" id="contact" aria-labelledby="contact-title"><div class="contact-inner"><p class="section-tag"><span aria-hidden="true">📬</span> Contact</p><h2 class="contact-title" id="contact-title">Let's build something<br /><span class="grad-text">that holds up.</span></h2><p class="contact-desc">Open to Summer 2027 internships and interesting collaborations.<br />Got something in mind? Let's talk.</p><a class="btn btn-primary btn-lg" href="mailto:amer.khan@uconn.edu" data-cursor="link">amer.khan@uconn.edu <span class="arrow" aria-hidden="true">↗</span></a><div class="social-row"><a class="social-card" href="https://github.com/amerkhan-dev" target="_blank" rel="noopener noreferrer" data-cursor="view"><span class="social-emoji" aria-hidden="true">🎯</span><span class="social-text"><span class="social-name">GitHub <span aria-hidden="true">↗</span></span><span class="social-handle">@amerkhan-dev</span></span></a><a class="social-card" href="https://www.linkedin.com/in/amer-khan-12a836358/" target="_blank" rel="noopener noreferrer" data-cursor="view"><span class="social-emoji" aria-hidden="true">🧑‍💼</span><span class="social-text"><span class="social-name">LinkedIn <span aria-hidden="true">↗</span></span><span class="social-handle">Amer Khan</span></span></a></div><div class="contact-links"><a href="tel:+16179499003" data-cursor="link">(617) 949-9003</a><span>Greater Boston &amp; Storrs, CT</span></div></div></section>
+    </main>
+    <footer class="footer"><p><span aria-hidden="true">⚡</span> Amer Khan. Made with care. Built to last.</p><a href="#home" data-cursor="link">Back to top <span class="arrow" aria-hidden="true">↑</span></a><p>© 2026</p></footer>
+  </div>
+  <div class="scroll-companion" id="scroll-companion" aria-hidden="true">
+  <p class="buddy-caption">Hey, I’m on it.</p>
+  <svg class="buddy-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 190" fill="none" focusable="false">
+    <defs>
+      <linearGradient id="buddy-shell" x1="41" y1="33" x2="108" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#f0e5ff"/><stop offset=".5" stop-color="#c9adf7"/><stop offset="1" stop-color="#9873d1"/></linearGradient>
+      <linearGradient id="buddy-body" x1="43" y1="104" x2="95" y2="158" gradientUnits="userSpaceOnUse"><stop stop-color="#ceb3f7"/><stop offset="1" stop-color="#8261b5"/></linearGradient>
+      <linearGradient id="buddy-display" x1="117" y1="92" x2="182" y2="145" gradientUnits="userSpaceOnUse"><stop stop-color="#2d2b51"/><stop offset="1" stop-color="#191328"/></linearGradient>
+      <linearGradient id="buddy-screen-edge" x1="113" y1="101" x2="180" y2="139" gradientUnits="userSpaceOnUse"><stop stop-color="#b69ae8"/><stop offset="1" stop-color="#756096"/></linearGradient>
+      <clipPath id="buddy-screen-clip"><path d="m122 97 56-7-6 45-52 7 2-45Z"/></clipPath>
+    </defs>
 
-        <!-- EDUCATION -->
-        <section class="section" id="education">
-          <div class="section-head reveal">
-            <span class="section-tag">01 — Education 🎓</span>
-            <h2>Built on a foundation of <span class="grad-text">math &amp; fundamentals</span></h2>
-          </div>
+    <!-- Seat, feet and the small patch of ground keep the silhouette grounded. -->
+    <ellipse cx="107" cy="175" rx="79" ry="9" fill="#100b20" fill-opacity=".26"/>
+    <path d="M49 141h47v12H49z" fill="#392a51" stroke="#b79bdc" stroke-width="2"/>
+    <path d="m54 152-5 19m40-19 5 19" stroke="#796094" stroke-width="5" stroke-linecap="round"/>
+    <path d="M58 146v13c0 4 4 6 10 6h12" stroke="#241936" stroke-width="15" stroke-linecap="round"/>
+    <path d="M58 146v13c0 4 4 6 10 6h12" stroke="#ba98ec" stroke-width="10" stroke-linecap="round"/>
+    <path d="m80 147 9 11 13 1" stroke="#251936" stroke-width="15" stroke-linecap="round"/>
+    <path d="m80 147 9 11 13 1" stroke="#9776c6" stroke-width="10" stroke-linecap="round"/>
+    <path d="M72 161h10a7 7 0 0 1 7 7H71a3 3 0 0 1-3-3 4 4 0 0 1 4-4Zm25-6h8a7 7 0 0 1 7 7H96a3 3 0 0 1-3-3 4 4 0 0 1 4-4Z" fill="#e2d2f8" stroke="#49305e" stroke-width="2"/>
 
-          <div class="edu-card reveal">
-            <div class="edu-top">
-              <div class="edu-school">
-                <h3>University of Connecticut</h3>
-                <p>College of Engineering · Storrs, CT</p>
-                <p class="edu-degree">B.S.E. Computer Science &amp; Engineering, Mathematics Minor</p>
-              </div>
-              <div class="edu-badge">
-                <span class="edu-badge-label">Expected</span>
-                <span class="edu-badge-value">May 2028</span>
-              </div>
-            </div>
+    <path d="M62 94h20v15H62z" fill="#6b508e" stroke="#382446" stroke-width="2"/>
+    <path d="M54 102c-10 4-15 18-13 32l3 11c14 6 30 6 46 0l5-22c1-10-5-18-14-21-9-3-18-3-27 0Z" fill="url(#buddy-body)" stroke="#392449" stroke-width="2.5"/>
+    <path d="M49 109c6-6 16-7 22-6" stroke="#eadcff" stroke-width="2.5" stroke-linecap="round" opacity=".65"/>
+    <rect x="57" y="119" width="18" height="15" rx="3" fill="#5f437f" stroke="#c2a6e9" stroke-width="1.5"/>
+    <path d="m61 126 3 3 6-7" stroke="#95f3e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 
-            <div class="edu-gpa-row">
-              <div class="gpa-tile gpa-tile-hero">
-                <span class="gpa-num" data-count="3.94">0.00</span>
-                <span class="gpa-label">GPA in CS &amp; mathematics coursework</span>
-              </div>
-              <div class="gpa-tile gpa-tile-text">
-                <span class="gpa-chip">🏆 Husky Academic Scholarship</span>
-                <span class="gpa-chip-sub">Maximum merit award</span>
-              </div>
-              <div class="gpa-tile gpa-tile-text">
-                <span class="gpa-chip">🤖 Anthropic Academy</span>
-                <span class="gpa-chip-sub">Full certification</span>
-              </div>
-            </div>
+    <g class="buddy-head">
+      <path d="m77 31 1-14" stroke="#bc9cdc" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="78" cy="13" r="6" fill="#593b78" stroke="#d8b9fb" stroke-width="2"/>
+      <circle class="buddy-antenna-light" cx="78" cy="13" r="3" fill="#93f2dc"/>
+      <path d="M29 57h-4c-5 0-7 4-7 9v8c0 5 3 9 8 9h7" fill="#a17dc8" stroke="#392449" stroke-width="2.5"/>
+      <path d="m22 65 1 11" stroke="#e1cbfb" stroke-width="2" stroke-linecap="round"/>
+      <path d="M40 37c18-9 43-10 59-1 8 4 13 13 13 23v18c0 11-6 19-15 22-17 6-42 3-55-6-9-6-14-15-14-26V57c0-9 4-15 12-20Z" fill="url(#buddy-shell)" stroke="#392449" stroke-width="2.7"/>
+      <path d="M40 44c15-9 36-10 50-5" stroke="#fff4ff" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+      <path d="M54 49c13-4 30-4 41 0 6 2 9 6 9 13v13c0 8-5 12-11 14-12 3-28 0-38-5-6-3-10-9-10-16v-6c0-6 3-11 9-13Z" fill="#241b38" stroke="#72538f" stroke-width="2"/>
+      <path d="M57 53c10-3 26-3 35 0" stroke="#a685cc" stroke-width="1.5" stroke-linecap="round" opacity=".45"/>
+      <g class="buddy-eyes" fill="#b5fff0">
+        <rect x="63" y="63" width="6" height="11" rx="3"/>
+        <rect x="88" y="62" width="6" height="11" rx="3"/>
+      </g>
+      <path d="M77 80c3 2 7 2 10 0" stroke="#e4beff" stroke-width="2" stroke-linecap="round"/>
+      <path d="m54 77 4 2m37-2 4-1" stroke="#b887df" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+      <circle cx="37" cy="74" r="2.5" fill="#8b64b6"/>
+    </g>
 
-            <div class="coursework">
-              <h4>Coursework</h4>
-              <div class="course-chips">
-                <span>Data Structures &amp; Object-Oriented Design</span>
-                <span>Multivariable Calculus</span>
-                <span>Differential Equations</span>
-                <span>Applied Linear Algebra</span>
-                <span>Digital Logic Design</span>
-                <span>Systems Programming</span>
-                <span>Cybersecurity Lab</span>
-                <span>Physics for Engineers I</span>
-                <span>Physics for Engineers II</span>
-              </div>
-            </div>
-          </div>
+    <!-- Both hands sit above the keyboard, allowing a tiny typing motion. -->
+    <path d="m48 116 10 15 23 5" stroke="#372447" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m48 116 10 15 23 5" stroke="#c4a5e8" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m87 114 8 12 21 5" stroke="#372447" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m87 114 8 12 21 5" stroke="#9b7ac2" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
 
-        </section>
+    <path d="m76 145 64-10 36 18-62 13-38-15v-6Z" fill="#7b5b9c" stroke="#382647" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="m76 145 64-10 36 14-63 13-37-17Z" fill="#b89bd9" stroke="#382647" stroke-width="2" stroke-linejoin="round"/>
+    <path d="m90 144 40-6 25 10-39 8-26-12Z" fill="#59436f"/>
+    <g stroke="#d6baf0" stroke-width="1.1" opacity=".65">
+      <path d="m96 143 25 11m-16-13 26 11m-15-13 26 11m-7-10-39 7m49-3-38 7"/>
+    </g>
+    <path d="m127 155 14-3 8 3-13 3-9-3Z" fill="#ddc8f2" opacity=".85"/>
 
-        <!-- EXPERIENCE -->
-        <section class="section" id="experience">
-          <div class="section-head reveal">
-            <span class="section-tag">02 — Experience ⚡</span>
-            <h2>Where I've <span class="grad-text">shipped</span></h2>
-            <p class="section-note">Industry, campus, and teaching — click any role to expand.</p>
-          </div>
+    <g class="buddy-hand buddy-hand-far">
+      <path d="m111 127 12 2c4 1 5 5 1 7l-11 1-7-5 5-5Z" fill="#dcc5fa" stroke="#463051" stroke-width="2"/>
+      <path d="m117 131 5 1" stroke="#9c76bb" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <g class="buddy-hand buddy-hand-near">
+      <path d="m80 131 13 3c4 1 5 4 2 7l-10 2-10-5 5-7Z" fill="#efdcff" stroke="#463051" stroke-width="2"/>
+      <path d="m87 136 6 2m-8 0 5 2" stroke="#a481c1" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
 
-          <div class="role-grid">
-            <div class="role-card reveal">
-              <button class="role-toggle" aria-expanded="false" data-cursor="link">
-                <div class="role-top">
-                  <span class="role-badge role-badge-startup">🚀 AI Startup</span>
-                  <span class="role-period">Jun 2026 — Sep 2026</span>
-                </div>
-                <h4>Software &amp; AI Engineer, Core Team</h4>
-                <p class="role-org">Twinly</p>
-                <p class="role-hook">50+ production agents shipped. Zero to 2,000+ followers. Top 10% of its YC cohort.</p>
-                <span class="role-chevron" aria-hidden="true">▸</span>
-              </button>
-              <div class="role-panel">
-                <div class="role-panel-inner">
-                  <div class="role-highlight">
-                    <span class="role-highlight-icon" aria-hidden="true">💸</span>
-                    <span>Pitched product and architecture to venture firms including <b>Underscore VC</b> — on a team ranked in the <b>top 10% of its Y Combinator cohort</b>, two batches running.</span>
-                  </div>
-                  <ul class="role-bullets">
-                    <li>Shipped <b>50+</b> production AI-agent use cases (4–5/week) — multi-step agentic workflows, LLM integration, tool-calling pipelines, prompt architecture, and real-time voice cloning — built and QAed end to end.</li>
-                    <li>Owned the desktop release pipeline end to end: <b>50+ builds</b> across macOS and Windows, debugging the full stack — Swift/macOS client, TypeScript services, Python agent backends.</li>
-                    <li>Hardened agent reliability against a scenario-based evaluation harness — traced failed runs, instrumented regression coverage across every production tool-call path, tightened retry logic.</li>
-                    <li>Grew the product from zero to <b>2,000+ followers</b> and <b>300+ active users</b> by owning distribution end to end.</li>
-                  </ul>
-                  <div class="role-tags">
-                    <span>Agentic Workflows</span><span>LLM Integration</span><span>Swift</span><span>TypeScript</span><span>Python</span><span>Voice Cloning</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <path d="m119 89 64-8c4-1 6 2 5 6l-7 56c0 3-2 5-5 5l-62 10c-3 0-5-2-5-5l5-58c0-3 2-5 5-6Z" fill="url(#buddy-screen-edge)" stroke="#382647" stroke-width="2.5"/>
+    <path d="m122 97 56-7-6 45-52 7 2-45Z" fill="url(#buddy-display)" stroke="#d7bdf0" stroke-width="1.4"/>
+    <g class="buddy-screen-lines" clip-path="url(#buddy-screen-clip)" stroke-linecap="round">
+      <path d="m130 105 8-1m5-1 18-2" stroke="#9aeedb" stroke-width="2.7"/>
+      <path d="m130 113 16-2m6-1 12-1" stroke="#b89aff" stroke-width="2.7"/>
+      <path d="m134 121 9-1m5-1 14-2" stroke="#e89ace" stroke-width="2.7"/>
+      <path d="m129 130 17-2" stroke="#9aeedb" stroke-width="2.7"/>
+      <path class="buddy-screen-caret" d="m151 126-.3 4" stroke="#f3deff" stroke-width="2"/>
+    </g>
+    <circle cx="150" cy="92" r="1" fill="#463156"/>
+    <path d="m137 147 13-2" stroke="#dcc5ed" stroke-width="2" stroke-linecap="round"/>
+    <path d="m183 166 4 1m-8-5 3-1" stroke="#c09cdc" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+  </svg>
+</div>
 
-            <div class="role-card reveal">
-              <button class="role-toggle" aria-expanded="false" data-cursor="link">
-                <div class="role-top">
-                  <span class="role-badge role-badge-corp">🏥 NEXT Program</span>
-                  <span class="role-period">May 2026 — Aug 2026</span>
-                </div>
-                <h4>Software Engineer, NEXT Program</h4>
-                <p class="role-org">The Cigna Group</p>
-                <p class="role-hook">3-tier AWS build on Lambda + DynamoDB. Best team in a cohort of 10+.</p>
-                <span class="role-chevron" aria-hidden="true">▸</span>
-              </button>
-              <div class="role-panel">
-                <div class="role-panel-inner">
-                  <div class="role-highlight">
-                    <span class="role-highlight-icon" aria-hidden="true">🏆</span>
-                    <span>Led a four-person team building <b>Tend</b> — named <b>best team</b> in a cohort of 10+ and briefed Cigna executives on architecture and product strategy.</span>
-                  </div>
-                  <ul class="role-bullets">
-                    <li>Architected and shipped a <b>3-tier AWS application</b> (React, 10+ Node.js REST endpoints, Lambda, DynamoDB) on Elastic Beanstalk behind CloudFront — added auto-scaling and CDN caching beyond program scope.</li>
-                    <li>Owned frontend and backend end to end: prototyped the data layer in SQLite, migrated to DynamoDB for production, and built <b>Pip</b>, the in-app AI agent.</li>
-                    <li>Ran code review with Cigna engineers and owned the pull-request pipeline, holding a production-ready build across a <b>12-week</b> delivery cycle.</li>
-                  </ul>
-                  <div class="role-tags">
-                    <span>React</span><span>Node.js</span><span>AWS Lambda</span><span>DynamoDB</span><span>CloudFront</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="role-card reveal">
-              <button class="role-toggle" aria-expanded="false" data-cursor="link">
-                <div class="role-top">
-                  <span class="role-badge">🐾 UConn</span>
-                  <span class="role-period">Fall 2025 — Present</span>
-                </div>
-                <h4>Chief Technology Officer</h4>
-                <p class="role-org">UConn FinTech Club</p>
-                <p class="role-hook">$15K budget, quant curriculum, and competition teams.</p>
-                <span class="role-chevron" aria-hidden="true">▸</span>
-              </button>
-              <div class="role-panel">
-                <div class="role-panel-inner">
-                  <ul class="role-bullets">
-                    <li>Direct a <b>$15,000</b> annual University budget across programming, competition entries, and student project teams.</li>
-                    <li>Own the technical curriculum — linear algebra, machine learning, and predictive modeling applied to markets.</li>
-                    <li>Build and mentor teams for quant finance and trading competitions.</li>
-                  </ul>
-                  <div class="role-tags">
-                    <span>Python</span><span>NumPy</span><span>Machine Learning</span><span>Predictive Modeling</span><span>Linear Algebra</span><span>Statistics</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="role-card reveal">
-              <button class="role-toggle" aria-expanded="false" data-cursor="link">
-                <div class="role-top">
-                  <span class="role-badge">🐾 UConn</span>
-                  <span class="role-period">May 2026 — Present</span>
-                </div>
-                <h4>Network Engineering &amp; Design Technician</h4>
-                <p class="role-org">UConn ITS</p>
-                <p class="role-hook">CAD layouts and fiber routing for a 20,000-student campus network.</p>
-                <span class="role-chevron" aria-hidden="true">▸</span>
-              </button>
-              <div class="role-panel">
-                <div class="role-panel-inner">
-                  <ul class="role-bullets">
-                    <li>Draft the CAD layouts engineers and contractors build campus network infrastructure from — cable routes, rack placement, pathway design.</li>
-                    <li>Map fiber and copper routes across buildings and outside-plant pathways; work with senior engineers on install planning and on-call response.</li>
-                  </ul>
-                  <div class="role-tags">
-                    <span>CAD</span><span>Network Design</span><span>Excel</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="role-card reveal">
-              <button class="role-toggle" aria-expanded="false" data-cursor="link">
-                <div class="role-top">
-                  <span class="role-badge">🐾 UConn</span>
-                  <span class="role-period">Aug 2026 — Present</span>
-                </div>
-                <h4>Undergraduate Teaching Assistant, CSE 1010</h4>
-                <p class="role-org">University of Connecticut</p>
-                <p class="role-hook">One of very few second-year TAs. 300+ students across 3 lab sections.</p>
-                <span class="role-chevron" aria-hidden="true">▸</span>
-              </button>
-              <div class="role-panel">
-                <div class="role-panel-inner">
-                  <ul class="role-bullets">
-                    <li>Selected as one of very few second-year TAs after earning an <b>A</b> in the course.</li>
-                    <li>Lead <b>3 lab sections</b>, supporting <b>300+ students</b> through office hours, grading, and one-on-one Python mentoring.</li>
-                  </ul>
-                  <div class="role-tags">
-                    <span>Python</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="role-card reveal">
-              <button class="role-toggle" aria-expanded="false" data-cursor="link">
-                <div class="role-top">
-                  <span class="role-badge role-badge-alt">🔥 Firefly Coders</span>
-                  <span class="role-period">May 2024 — Aug 2024</span>
-                </div>
-                <h4>Python Instructor</h4>
-                <p class="role-org">Firefly Coders</p>
-                <p class="role-hook">Wrote 200+ original lessons. Taught 100+ students, ages 5–15.</p>
-                <span class="role-chevron" aria-hidden="true">▸</span>
-              </button>
-              <div class="role-panel">
-                <div class="role-panel-inner">
-                  <ul class="role-bullets">
-                    <li>Authored the program's full Python curriculum from scratch — <b>200+ lessons</b> from core syntax through recursion and object-oriented design — before starting college.</li>
-                    <li>Taught <b>100+ students</b> ages 5–15, adapting every lesson across a wide range of skill levels.</li>
-                  </ul>
-                  <div class="role-tags">
-                    <span>Python</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- PROJECTS -->
-        <section class="section" id="projects">
-          <div class="section-head reveal">
-            <span class="section-tag">03 — Projects 🛠️</span>
-            <h2>Things I've <span class="grad-text">built</span></h2>
-          </div>
-
-          <div class="projects-grid">
-            <article class="project-card reveal" data-tilt>
-              <div class="project-glow"></div>
-              <div class="project-top">
-                <span class="project-index">01</span>
-                <span class="project-year">2026</span>
-              </div>
-              <h3>🌱 Tend</h3>
-              <p class="project-sub">3-Tier AWS Cloud Application · with The Cigna Group</p>
-              <p class="project-desc">React / Node.js platform on AWS Lambda &amp; DynamoDB for mental health access — habit tracking, adaptive check-ins, conversational scheduling, focus blocking, and Pip, an in-app AI agent.</p>
-              <div class="project-tags">
-                <span>React</span><span>AWS Lambda</span><span>DynamoDB</span><span>AI Agent</span>
-              </div>
-              <div class="project-links">
-                <a class="project-link" href="https://amerkhan.netlify.app" target="_blank" rel="noopener" data-cursor="view">Live demo <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-                <a class="project-link project-link-alt" href="https://github.com/amerkhan-dev/Tend" target="_blank" rel="noopener" data-cursor="view">🎯 Repo <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-              </div>
-            </article>
-
-            <article class="project-card reveal" data-tilt>
-              <div class="project-glow"></div>
-              <div class="project-top">
-                <span class="project-index">02</span>
-                <span class="project-year">2026</span>
-              </div>
-              <h3>🗂️ TwinTrack</h3>
-              <p class="project-sub">Full-Stack Task-Management Platform</p>
-              <p class="project-desc">Co-designed &amp; built the platform 45+ Twinly contributors use daily for task assignment, deadline tracking, and GitHub pull-request review — 200+ commits, shipped for the summer internship cohort.</p>
-              <div class="project-tags">
-                <span>Full-Stack</span><span>GitHub API</span><span>Team Tooling</span>
-              </div>
-              <div class="project-links">
-                <a class="project-link" href="https://twintrack.twinly.tech" target="_blank" rel="noopener" data-cursor="view">Visit site <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-              </div>
-            </article>
-
-            <article class="project-card project-card-wide reveal" data-tilt>
-              <div class="project-glow"></div>
-              <div class="project-top">
-                <span class="project-index">03</span>
-                <span class="project-year">2025</span>
-              </div>
-              <h3>♠️ Poker Equity &amp; EV Simulator</h3>
-              <p class="project-sub">Monte Carlo Simulation Engine · UConn</p>
-              <p class="project-desc">Monte Carlo engine that runs hand equities and expected value across simulated ranges — built for coursework, then extended into a probability sandbox for the FinTech Club's quant curriculum.</p>
-              <div class="project-tags">
-                <span>Python</span><span>NumPy</span><span>Monte Carlo</span><span>Probability</span>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- SKILLS -->
-        <section class="section" id="skills">
-          <div class="section-head reveal">
-            <span class="section-tag">04 — Skills 🧠</span>
-            <h2>Tools of the <span class="grad-text">trade</span></h2>
-          </div>
-
-          <div class="skills-grid">
-            <div class="skill-card reveal" data-tilt>
-              <h4><span class="skill-icon">💻</span>Languages</h4>
-              <div class="tag-cloud">
-                <span>Python</span><span>TypeScript</span><span>JavaScript</span><span>Swift</span><span>C</span><span>C++</span><span>Java</span><span>SQL</span>
-              </div>
-            </div>
-            <div class="skill-card reveal" data-tilt>
-              <h4><span class="skill-icon">🤖</span>AI &amp; ML</h4>
-              <div class="tag-cloud">
-                <span>Agent Architecture</span><span>LLM Integration</span><span>Prompt Engineering</span><span>Tool Calling</span><span>Agent Evaluation</span><span>Voice Cloning / TTS</span><span>Machine Learning</span>
-              </div>
-            </div>
-            <div class="skill-card reveal" data-tilt>
-              <h4><span class="skill-icon">☁️</span>Frameworks &amp; Cloud</h4>
-              <div class="tag-cloud">
-                <span>React</span><span>Node.js</span><span>REST APIs</span><span>AWS Lambda</span><span>EC2</span><span>RDS</span><span>DynamoDB</span><span>Beanstalk</span><span>CloudFront</span><span>Git</span><span>CI/CD</span>
-              </div>
-            </div>
-            <div class="skill-card reveal" data-tilt>
-              <h4><span class="skill-icon">🔌</span>Hardware &amp; Systems</h4>
-              <div class="tag-cloud">
-                <span>Digital Logic Design</span><span>Systems Programming</span><span>CAD</span><span>Network Design</span><span>Fiber &amp; Copper Routing</span><span>Linux</span><span>C / C++</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section class="section contact-section" id="contact">
-          <div class="contact-inner reveal">
-            <span class="section-tag">05 — Contact 📬</span>
-            <h2 class="contact-title">Let's build <span class="grad-text">something great</span>.</h2>
-            <p class="contact-desc">Open to Summer 2027 internships and interesting collaborations. Reach out — I usually reply within a day.</p>
-            <a class="btn btn-primary btn-lg" href="mailto:amer.khan@uconn.edu" data-cursor="link">
-              <span>amer.khan@uconn.edu</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <div class="social-row">
-              <a class="social-card" href="https://github.com/amerkhan-dev" target="_blank" rel="noopener" data-cursor="link">
-                <span class="social-emoji">🎯</span>
-                <span class="social-text">
-                  <span class="social-name">GitHub</span>
-                  <span class="social-handle">@amerkhan-dev</span>
-                </span>
-              </a>
-              <a class="social-card" href="https://www.linkedin.com/in/amer-khan-12a836358/" target="_blank" rel="noopener" data-cursor="link">
-                <span class="social-emoji">🧑‍💼</span>
-                <span class="social-text">
-                  <span class="social-name">LinkedIn</span>
-                  <span class="social-handle">Amer Khan</span>
-                </span>
-              </a>
-            </div>
-            <div class="contact-links">
-              <a href="tel:+16179499003" data-cursor="link">(617) 949-9003</a>
-              <a href="https://github.com/amerkhan-dev/Tend" target="_blank" rel="noopener" data-cursor="link">Tend Repo</a>
-              <a href="https://twintrack.twinly.tech" target="_blank" rel="noopener" data-cursor="link">TwinTrack</a>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <p>⚡ Designed &amp; built by Amer Khan — Greater Boston · Storrs, CT</p>
-        <p class="footer-year">© 2026</p>
-      </footer>
-    </div>
-
-    <script type="module" src="/src/main.ts"></script>
-  </body>
-</html>
+  <script type="module" src="/src/main.ts"></script>
+</body></html>

@@ -1,0 +1,128 @@
+/* A small, decorative desktop companion. Its default state is motionless. */
+.scroll-companion {
+  --buddy-ink: #211637;
+  --buddy-edge: #d5c2ff;
+  position: fixed;
+  right: 22px;
+  bottom: 18px;
+  z-index: 18;
+  width: 128px;
+  pointer-events: none;
+  user-select: none;
+  contain: layout style;
+  transform: translateZ(0);
+}
+
+.buddy-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 7px 12px #09041180);
+}
+
+.buddy-caption {
+  position: relative;
+  display: table;
+  max-width: 150px;
+  margin: 0 auto -2px;
+  padding: 7px 10px;
+  border: 1px solid #c9a8ff69;
+  border-radius: 11px 11px 3px 11px;
+  background: #241734ed;
+  box-shadow: 0 4px 14px #09041135;
+  color: #eee5ff;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.buddy-head {
+  transform-box: fill-box;
+  transform-origin: 50% 90%;
+}
+
+.buddy-eyes {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.buddy-hand {
+  transform-box: fill-box;
+  transform-origin: 10% 50%;
+}
+
+.buddy-screen-caret,
+.buddy-antenna-light {
+  opacity: .9;
+}
+
+.scroll-companion.motion-enabled .buddy-eyes {
+  animation: buddy-blink 7.2s infinite;
+}
+
+.scroll-companion.motion-enabled.is-scrolling .buddy-head {
+  animation: buddy-concentrate 700ms ease-in-out infinite alternate;
+}
+
+.scroll-companion.motion-enabled.is-scrolling .buddy-hand-near {
+  animation: buddy-type 230ms ease-in-out infinite alternate;
+}
+
+.scroll-companion.motion-enabled.is-scrolling .buddy-hand-far {
+  animation: buddy-type 280ms 80ms ease-in-out infinite alternate-reverse;
+}
+
+.scroll-companion.motion-enabled.is-scrolling .buddy-screen-caret {
+  animation: buddy-caret 600ms steps(2, jump-none) infinite;
+}
+
+.scroll-companion.motion-enabled.is-scrolling .buddy-antenna-light {
+  animation: buddy-signal 800ms ease-in-out infinite alternate;
+}
+
+@keyframes buddy-blink {
+  0%, 43%, 46%, 100% { transform: scaleY(1); }
+  44.1%, 44.9% { transform: scaleY(.12); }
+}
+
+@keyframes buddy-concentrate {
+  from { transform: rotate(0deg) translateY(0); }
+  to { transform: rotate(3deg) translateY(1px); }
+}
+
+@keyframes buddy-type {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(-3px) rotate(-5deg); }
+}
+
+@keyframes buddy-caret {
+  from { opacity: .25; }
+  to { opacity: 1; }
+}
+
+@keyframes buddy-signal {
+  from { opacity: .65; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .scroll-companion { width: 66px; left: 74px; right: auto; top: 3px; bottom: auto; z-index: 101; }
+  .buddy-caption { display: none; }
+  .buddy-art { filter: drop-shadow(0 4px 8px #09041170); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-companion *,
+  .scroll-companion.motion-enabled * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  .scroll-companion { display: none; }
+}
