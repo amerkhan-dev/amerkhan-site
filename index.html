@@ -29,6 +29,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
   <div class="cursor-ring" id="cursorRing" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
+  <div class="fx-layer" id="fxLayer" aria-hidden="true"></div>
   <div class="ambient-scene" aria-hidden="true"><div class="glow glow-a"></div><div class="glow glow-b"></div><div class="glow glow-c"></div><div class="starfield"></div><div class="signal-orbit orbit-one"></div><div class="signal-orbit orbit-two"></div></div>
   <div class="noise" aria-hidden="true"></div>
   <div id="app">
@@ -37,7 +38,7 @@
       <a class="nav-brand" href="#home" aria-label="AK. — Amer Khan, home" data-cursor="link">AK<span class="dot">.</span></a>
       <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" hidden>Menu <span aria-hidden="true">+</span></button>
       <nav class="nav-links" id="primary-navigation" aria-label="Main navigation">
-        <a href="#education" data-cursor="link">Education</a><a href="#experience" data-cursor="link">Experience</a><a href="#projects" data-cursor="link">Projects</a><a href="#skills" data-cursor="link">Skills</a><a href="#contact" data-cursor="link">Contact <span class="arrow" aria-hidden="true">↗</span></a>
+        <a href="#education" data-cursor="link"><span class="nav-emoji" aria-hidden="true">🎓</span>Education</a><a href="#experience" data-cursor="link"><span class="nav-emoji" aria-hidden="true">⚡</span>Experience</a><a href="#projects" data-cursor="link"><span class="nav-emoji" aria-hidden="true">🛠️</span>Projects</a><a href="#skills" data-cursor="link"><span class="nav-emoji" aria-hidden="true">🧠</span>Skills</a><a href="#hobbies" data-cursor="link"><span class="nav-emoji" aria-hidden="true">🎲</span>Hobbies</a><a href="#contact" data-cursor="link"><span class="nav-emoji" aria-hidden="true">📬</span>Contact <span class="arrow" aria-hidden="true">↗</span></a>
       </nav>
       <a class="nav-cta" href="mailto:amer.khan@uconn.edu" data-cursor="link">Let's talk <span aria-hidden="true">↗</span></a>
     </header>
@@ -45,29 +46,29 @@
       <section class="hero" id="home" aria-labelledby="hero-title">
         <div class="hero-inner">
           <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Available for Summer 2027 internships</p>
-          <h1 class="hero-title" id="hero-title"><span class="line hero-name">Amer Khan<span class="name-spark" aria-hidden="true">✳</span></span><span class="line hero-sub">Software &amp; <span class="grad-text">AI</span> Engineer</span></h1>
-          <div class="hero-desc"><p class="hero-punch">I build AI agents, software, and the <span class="grad-text">systems beneath them.</span></p><p class="hero-support">From the first decision to the last mile. Built for the unexpected.</p><p class="hero-meta"><span aria-hidden="true">🎓</span> Computer Science &amp; Engineering + Mathematics minor<br /><span class="hl">UConn College of Engineering</span>, class of 2028</p></div>
+          <h1 class="hero-title" id="hero-title"><span class="line hero-name">Amer Khan<span class="name-spark" aria-hidden="true" data-spark data-cursor="spark" data-cursor-label="Click">✳</span></span><span class="line hero-sub">Software &amp; <span class="grad-text">AI</span> Engineer</span></h1>
+          <div class="hero-desc"><p class="hero-punch">I build AI agents, software, and the <span class="grad-text">systems beneath them.</span></p><p class="hero-support">From the first decision to the last mile. Built for the unexpected.</p><p class="hero-meta"><span aria-hidden="true">🎓</span> Computer Science &amp; Engineering + Mathematics minor<br /><span class="hl">UConn College of Engineering</span>, class of 2028</p><p class="hero-offclock"><a class="hero-hobbies" href="#hobbies" aria-label="Off the clock: hobbies and free time" data-cursor="link"><span class="hero-hobbies-label">Off the clock</span><span class="hero-hobbies-emoji" aria-hidden="true"><span>🃏</span><span>🏋️</span><span>🧊</span><span>🥊</span><span>⚽</span></span><span class="arrow" aria-hidden="true">↘</span></a></p></div>
           <div class="hero-actions"><a class="btn btn-primary" href="#projects" data-cursor="link">Explore my work <span class="arrow" aria-hidden="true">↘</span></a><a class="btn btn-ghost" href="mailto:amer.khan@uconn.edu" data-cursor="link">Say hello <span class="arrow" aria-hidden="true">↗</span></a></div>
           <div class="hero-stats" aria-label="At a glance"><div class="hstat"><span class="hstat-num stat-value" data-counter>3.94</span><span class="hstat-label">GPA in CS &amp; math coursework</span></div><div class="hstat-sep" aria-hidden="true"></div><div class="hstat"><span class="hstat-num stat-value" data-counter>50+</span><span class="hstat-label">Production AI-agent use cases shipped</span></div><div class="hstat-sep" aria-hidden="true"></div><div class="hstat"><span class="hstat-num stat-value" data-counter>2,000+</span><span class="hstat-label">Twinly followers, grown from zero</span></div></div>
         </div>
         <a class="scroll-cue" href="#numbers" aria-label="Explore the numbers" data-cursor="link"><span>Keep exploring</span><span aria-hidden="true">↓</span></a>
       </section>
       <section class="numbers-section" id="numbers" aria-labelledby="numbers-title"><div class="numbers-inner"><h2 class="numbers-eyebrow" id="numbers-title"><span aria-hidden="true">📊</span> By the numbers</h2><div class="numbers-grid">
-        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>3.94</span><span class="numbers-label">GPA in CS &amp; math coursework</span></div>
-        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>50+</span><span class="numbers-label">Production AI-agent use cases</span></div>
-        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>2,000+</span><span class="numbers-label">Twinly followers, from zero</span></div>
-        <div class="numbers-item"><span class="numbers-value stat-value">Top 10%</span><span class="numbers-label">Y Combinator cohort, two batches</span></div>
-        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>$15K</span><span class="numbers-label">FinTech budget directed</span></div>
-        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>45+</span><span class="numbers-label">TwinTrack contributors, daily</span></div>
-        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>300+</span><span class="numbers-label">Students supported, three lab sections</span></div>
-        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>20,000</span><span class="numbers-label">Students on the campus network</span></div>
-        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>200+</span><span class="numbers-label">Original Python lessons authored</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>3.94</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">🎓</span>GPA in CS &amp; math coursework</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>50+</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">🤖</span>Production AI-agent use cases</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>2,000+</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">📈</span>Twinly followers, from zero</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value">Top 10%</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">🚀</span>Y Combinator cohort, two batches</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>$15K</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">💸</span>FinTech budget directed</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>45+</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">🧑‍💻</span>TwinTrack contributors, daily</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>300+</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">🧑‍🏫</span>Students supported, three lab sections</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>20,000</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">🌐</span>Students on the campus network</span></div>
+        <div class="numbers-item"><span class="numbers-value stat-value" data-counter>200+</span><span class="numbers-label"><span class="numbers-emoji" aria-hidden="true">🐍</span>Original Python lessons authored</span></div>
       </div></div></section>
       <section class="section" id="education" aria-labelledby="education-title"><div class="section-head"><p class="section-tag"><span aria-hidden="true">🎓</span> Education</p><h2 id="education-title">Software. Systems.<br /><span class="grad-text">The math underneath.</span></h2></div><article class="edu-card" data-tilt>
         <div class="edu-top"><div class="edu-school"><h3>University of Connecticut</h3><p>College of Engineering, Storrs, CT</p><p class="edu-degree">B.S.E. Computer Science &amp; Engineering, Mathematics Minor</p></div><div class="edu-badge"><span class="edu-badge-label">Expected</span><span class="edu-badge-value">May 2028</span></div></div>
         <p class="education-intro">My work spans agent behavior, cloud applications, digital logic, and campus network infrastructure. I like understanding how the whole thing fits together.</p>
         <div class="edu-gpa-row"><div class="gpa-tile gpa-tile-hero"><span class="gpa-num stat-value" data-counter>3.94</span><span class="gpa-label">GPA in CS &amp; math coursework</span></div><div class="gpa-tile gpa-tile-text"><span class="gpa-chip"><span aria-hidden="true">🏆</span> Husky Academic Scholarship</span><span class="gpa-chip-sub">Maximum merit award</span></div><div class="gpa-tile gpa-tile-text"><span class="gpa-chip"><span aria-hidden="true">🤖</span> Anthropic Academy</span><span class="gpa-chip-sub">Full certification</span></div></div>
-        <div class="coursework"><h4>Selected coursework</h4><ul class="course-chips"><li>Data Structures &amp; Object-Oriented Design</li><li>Systems Programming</li><li>Digital Logic Design</li><li>Applied Linear Algebra</li><li>Multivariable Calculus</li><li>Differential Equations</li><li>Cybersecurity Lab</li><li>Physics for Engineers I &amp; II</li></ul></div>
+        <div class="coursework"><h4>Selected coursework</h4><ul class="course-chips"><li><span aria-hidden="true">🧱</span> Data Structures &amp; Object-Oriented Design</li><li><span aria-hidden="true">⚙️</span> Systems Programming</li><li><span aria-hidden="true">🔌</span> Digital Logic Design</li><li><span aria-hidden="true">📐</span> Applied Linear Algebra</li><li><span aria-hidden="true">📈</span> Multivariable Calculus</li><li><span aria-hidden="true">🌀</span> Differential Equations</li><li><span aria-hidden="true">🔐</span> Cybersecurity Lab</li><li><span aria-hidden="true">🧲</span> Physics for Engineers I &amp; II</li></ul></div>
       </article></section>
       <section class="section" id="experience" aria-labelledby="experience-title">
   <div class="section-head">
@@ -215,11 +216,146 @@
         <article class="skill-card" data-tilt><h3><span class="skill-icon" aria-hidden="true">☁️</span> Frameworks &amp; cloud</h3><ul class="tag-cloud"><li>React</li><li>Node.js</li><li>REST APIs</li><li>AWS Lambda</li><li>EC2</li><li>RDS</li><li>DynamoDB</li><li>Elastic Beanstalk</li><li>CloudFront</li><li>Git &amp; CI/CD</li></ul></article>
         <article class="skill-card" data-tilt><h3><span class="skill-icon" aria-hidden="true">🔌</span> Hardware &amp; systems</h3><ul class="tag-cloud"><li>Digital logic</li><li>Systems programming</li><li>CAD</li><li>Network design</li><li>Fiber &amp; copper routing</li><li>Linux</li><li>Durable execution</li><li>Crash recovery</li><li>Evidence adjudication</li><li>Regression testing</li></ul></article>
       </div></section>
-      <section class="section contact-section" id="contact" aria-labelledby="contact-title"><div class="contact-inner"><p class="section-tag"><span aria-hidden="true">📬</span> Contact</p><h2 class="contact-title" id="contact-title">Let's build something<br /><span class="grad-text">that holds up.</span></h2><p class="contact-desc">Open to Summer 2027 internships and interesting collaborations.<br />Got something in mind? Let's talk.</p><a class="btn btn-primary btn-lg" href="mailto:amer.khan@uconn.edu" data-cursor="link">amer.khan@uconn.edu <span class="arrow" aria-hidden="true">↗</span></a><div class="social-row"><a class="social-card" href="https://github.com/amerkhan-dev" target="_blank" rel="noopener noreferrer" data-cursor="view"><span class="social-emoji" aria-hidden="true">🎯</span><span class="social-text"><span class="social-name">GitHub <span aria-hidden="true">↗</span></span><span class="social-handle">@amerkhan-dev</span></span></a><a class="social-card" href="https://www.linkedin.com/in/amer-khan-12a836358/" target="_blank" rel="noopener noreferrer" data-cursor="view"><span class="social-emoji" aria-hidden="true">🧑‍💼</span><span class="social-text"><span class="social-name">LinkedIn <span aria-hidden="true">↗</span></span><span class="social-handle">Amer Khan</span></span></a></div><div class="contact-links"><a href="tel:+16179499003" data-cursor="link">(617) 949-9003</a><span>Greater Boston &amp; Storrs, CT</span></div></div></section>
+      <div class="emoji-ticker" aria-hidden="true"><div class="ticker-track">
+        <span>🃏 Thinking in EV</span><span>🏋️ 2× bodyweight bench</span><span>🎯 Chasing 340+</span><span>🧊 Cubing</span><span>🥊 MMA</span><span>⚽ 3 years varsity</span><span>🏅 MetroWest Academic All-Star</span><span>🏀 UConn intramurals</span>
+        <span>🃏 Thinking in EV</span><span>🏋️ 2× bodyweight bench</span><span>🎯 Chasing 340+</span><span>🧊 Cubing</span><span>🥊 MMA</span><span>⚽ 3 years varsity</span><span>🏅 MetroWest Academic All-Star</span><span>🏀 UConn intramurals</span>
+      </div></div>
+      <section class="section hobbies-section" id="hobbies" aria-labelledby="hobbies-title">
+        <div class="section-head">
+          <p class="section-tag"><span aria-hidden="true">🎲</span> Hobbies &amp; free time</p>
+          <h2 id="hobbies-title">Off the clock, <span class="grad-text">still chasing PRs.</span></h2>
+          <p class="section-note">Personal records, not pull requests. Same habits, though: reps, discipline, and good decisions under pressure.</p>
+        </div>
+        <div class="hobby-grid">
+          <article class="hobby-card hobby-poker" id="hobby-poker" aria-labelledby="hobby-poker-title" data-tilt="flat" data-cursor-emoji="🃏" data-burst="🃏 ♥️ ♦️ ✨" data-buddy="Pot odds check… 🧮">
+            <div class="hobby-copy">
+              <p class="hobby-kicker"><span class="hobby-emoji hobby-emoji-suit" aria-hidden="true">♠&#xFE0E;</span> Poker</p>
+              <h3 id="hobby-poker-title">Thinking in expected value</h3>
+              <p class="hobby-desc">Poker is where I sharpen decision-making under uncertainty. I play a lot, and I approach every hand like a quant: put opponents on ranges, weigh pot odds against equity, and take the +EV line, even when variance bites back. Over enough hands, good decisions beat good luck.</p>
+              <ul class="hobby-tags" aria-label="Poker concepts"><li>Ranges</li><li>Pot odds</li><li>Equity</li><li>Expected value</li><li>Game theory</li></ul>
+            </div>
+            <div class="poker-table" data-poker hidden>
+              <div class="poker-top">
+                <div class="poker-felt" aria-hidden="true">
+                  <div class="poker-cards">
+                    <span class="playing-card"><span class="card-inner"><span class="card-back"></span><span class="card-front"><span class="card-rank" data-card-rank></span><span class="card-suit" data-card-suit></span></span></span></span>
+                    <span class="playing-card"><span class="card-inner"><span class="card-back"></span><span class="card-front"><span class="card-rank" data-card-rank></span><span class="card-suit" data-card-suit></span></span></span></span>
+                  </div>
+                  <div class="poker-meter"><span class="poker-meter-fill" data-poker-meter></span><span class="poker-meter-mark"></span></div>
+                </div>
+                <div class="poker-readout">
+                  <p class="poker-equity"><span class="poker-equity-value" data-poker-equity>--.-%</span><span class="poker-equity-label">equity vs. a random hand</span></p>
+                  <p class="poker-hand" data-poker-hand>Deal a hand and watch the odds converge.</p>
+                  <p class="poker-sims" data-poker-sims>20,000 Monte Carlo runs, live in your browser. Same idea as my <a href="#poker" data-cursor="link">equity simulator</a>.</p>
+                  <button class="hobby-button" type="button" data-poker-deal><span aria-hidden="true">🃏</span> Deal me in</button>
+                </div>
+              </div>
+              <figure class="poker-chart">
+                <figcaption class="poker-chart-title">Running equity estimate <span>· band = 95% confidence</span></figcaption>
+                <div class="poker-chart-plot" tabindex="0" role="group" aria-label="Convergence chart. Use the left and right arrow keys to read the running estimate." data-poker-chart data-cursor="chart" data-no-burst>
+                  <div class="equity-tip" aria-live="polite" data-chart-tip hidden></div>
+                </div>
+                <table class="visually-hidden">
+                  <caption>Running equity estimate at checkpoints</caption>
+                  <thead><tr><th scope="col">Simulated boards</th><th scope="col">Equity estimate</th><th scope="col">95% confidence interval</th></tr></thead>
+                  <tbody data-poker-table></tbody>
+                </table>
+              </figure>
+              <p class="visually-hidden" aria-live="polite" data-poker-live></p>
+            </div>
+          </article>
+          <article class="hobby-card hobby-lift" id="hobby-lift" aria-labelledby="hobby-lift-title" data-tilt="flat" data-cursor-emoji="🏋️" data-burst="💪 🏋️ 🔥" data-buddy="2× bodyweight?! 🤯">
+            <p class="hobby-kicker"><span class="hobby-emoji" aria-hidden="true">🏋️</span> Lifting &amp; powerlifting</p>
+            <h3 id="hobby-lift-title">2× bodyweight bench</h3>
+            <p class="hobby-desc">The gym is where discipline compounds. I'm all in on lifting and powerlifting, and I put in the work to bench press twice my bodyweight. Now I'm closing in on a 340+ lb bench at 165 lb.</p>
+            <div class="lift-stats">
+              <div class="lift-stat lift-stat-hero"><span class="lift-value">2×</span><span class="lift-label">Bodyweight bench <span aria-hidden="true">✅</span></span></div>
+              <div class="lift-stat"><span class="lift-value"><span class="stat-value" data-counter>165</span> lb</span><span class="lift-label">Bodyweight</span></div>
+              <div class="lift-stat"><span class="lift-value"><span class="stat-value" data-counter>340+</span> lb</span><span class="lift-label">Next target <span aria-hidden="true">🎯</span></span></div>
+            </div>
+            <div class="barbell" data-barbell data-bodyweight="165" hidden>
+              <svg class="barbell-art" viewBox="0 0 360 130" aria-hidden="true" focusable="false">
+                <ellipse class="barbell-shadow" cx="180" cy="121" rx="150" ry="4"/>
+                <g class="barbell-half barbell-half-left">
+                  <rect class="barbell-shaft" x="66" y="62" width="116" height="6" rx="3"/>
+                  <path class="barbell-knurl" d="M110 63v4m6-4v4m6-4v4m6-4v4m6-4v4m6-4v4m6-4v4"/>
+                  <rect class="barbell-sleeve" x="4" y="60" width="58" height="10" rx="3"/>
+                  <rect class="barbell-collar" x="58" y="55" width="9" height="20" rx="2"/>
+                  <g class="barbell-plates" data-plates="left"></g>
+                </g>
+                <g class="barbell-half barbell-half-right">
+                  <rect class="barbell-shaft" x="178" y="62" width="116" height="6" rx="3"/>
+                  <path class="barbell-knurl" d="M226 63v4m6-4v4m6-4v4m6-4v4m6-4v4m6-4v4m6-4v4"/>
+                  <rect class="barbell-sleeve" x="298" y="60" width="58" height="10" rx="3"/>
+                  <rect class="barbell-collar" x="293" y="55" width="9" height="20" rx="2"/>
+                  <g class="barbell-plates" data-plates="right"></g>
+                </g>
+              </svg>
+              <div class="barbell-readout">
+                <p class="barbell-total"><span data-barbell-total>45</span> <span class="barbell-unit">lb</span></p>
+                <p class="barbell-note" data-barbell-note>Just the bar. Let's load it. <span aria-hidden="true">🏋️</span></p>
+              </div>
+              <div class="hobby-actions">
+                <button class="hobby-button" type="button" data-barbell-add>Add 45s</button>
+                <button class="hobby-button hobby-button-ghost" type="button" data-barbell-reset><span aria-hidden="true">🔄</span> Strip it</button>
+              </div>
+              <p class="visually-hidden" aria-live="polite" data-barbell-live></p>
+            </div>
+          </article>
+          <article class="hobby-card hobby-cube" id="hobby-cube" aria-labelledby="hobby-cube-title" data-tilt="flat" data-cursor-emoji="🧊" data-burst="🟥 🟧 🟨 🟩 🟦 ⬜" data-buddy="Scramble me! 🧊">
+            <p class="hobby-kicker"><span class="hobby-emoji" aria-hidden="true">🧊</span> Rubik's Cube</p>
+            <h3 id="hobby-cube-title">Algorithms you can hold</h3>
+            <p class="hobby-desc">Cubing scratches the same itch as engineering: spot the pattern, run the right algorithm, and watch chaos resolve into order.</p>
+            <div class="cube-widget" data-cube hidden>
+              <div class="cube-stage" tabindex="0" role="group" aria-roledescription="3D puzzle" aria-label="Interactive cube. Drag or use the arrow keys to rotate it. Press U, D, L, R, F or B to turn a face, and hold Shift to turn it counter-clockwise." data-cube-stage data-cursor="drag" data-cursor-label="Drag" data-no-burst></div>
+              <p class="cube-status" data-cube-status><span aria-hidden="true">✅</span> Solved</p>
+              <p class="cube-tape" aria-hidden="true" data-cube-tape>Drag to spin · keys U D L R F B</p>
+              <div class="hobby-actions">
+                <button class="hobby-button" type="button" data-cube-scramble><span aria-hidden="true">🔀</span> Scramble</button>
+                <button class="hobby-button hobby-button-ghost" type="button" data-cube-solve><span aria-hidden="true">✨</span> Solve</button>
+              </div>
+              <p class="visually-hidden" aria-live="polite" data-cube-live></p>
+            </div>
+          </article>
+          <article class="hobby-card hobby-sports" id="hobby-sports" aria-labelledby="hobby-sports-title" data-tilt="flat" data-cursor-emoji="⚽" data-burst="⚽ 🏀 🏅" data-buddy="GOOOAL! ⚽">
+            <p class="hobby-kicker"><span class="hobby-emoji" aria-hidden="true">⚽</span> Soccer &amp; basketball</p>
+            <h3 id="hobby-sports-title">Varsity roots, intramural reps</h3>
+            <p class="hobby-desc">Three-year varsity soccer athlete in high school and a MetroWest Academic All-Star for the 2024–25 season. At UConn, I keep competing in intramural soccer and basketball.</p>
+            <ul class="hobby-badges" aria-label="Soccer and basketball highlights">
+              <li><span aria-hidden="true">🏅</span> MetroWest Academic All-Star, 2024–25</li>
+              <li><span aria-hidden="true">⚽</span> 3 years varsity soccer</li>
+              <li><span aria-hidden="true">🏀</span> UConn intramural soccer &amp; basketball</li>
+            </ul>
+            <div class="keepy" data-keepy hidden>
+              <div class="keepy-pitch" data-keepy-pitch>
+                <span class="keepy-goal" aria-hidden="true"></span>
+                <span class="keepy-shadow" aria-hidden="true" data-keepy-shadow></span>
+                <button class="keepy-ball" type="button" aria-label="Kick the ball" data-keepy-ball data-cursor="kick" data-cursor-label="Kick!"><span aria-hidden="true">⚽</span></button>
+              </div>
+              <p class="keepy-score"><span class="keepy-count" data-keepy-count>0</span> touches <span aria-hidden="true">·</span> best <span data-keepy-best>0</span></p>
+              <p class="keepy-hint">Keepy-uppy: click the ball to juggle. Don't let it drop!</p>
+              <p class="visually-hidden" aria-live="polite" data-keepy-live></p>
+            </div>
+          </article>
+          <article class="hobby-card hobby-mma" id="hobby-mma" aria-labelledby="hobby-mma-title" data-tilt="flat" data-cursor-emoji="🥊" data-burst="🥊 💥" data-buddy="Hands up! 🥊">
+            <p class="hobby-kicker"><span class="hobby-emoji hobby-emoji-jab" aria-hidden="true">🥊</span> MMA</p>
+            <h3 id="hobby-mma-title">Fight IQ</h3>
+            <p class="hobby-desc">I'm all in on MMA and martial arts: the technique, the game-planning, and the composure it takes to adapt when the plan meets reality.</p>
+            <ul class="hobby-tags" aria-label="What I love about MMA"><li>Technique</li><li>Game plans</li><li>Fight IQ</li><li>Composure</li></ul>
+            <div class="reflex" data-reflex hidden>
+              <button class="reflex-pad" type="button" data-reflex-pad data-state="idle"><span class="reflex-emoji" aria-hidden="true">🥊</span><span class="reflex-text" data-reflex-text>Reflex check: tap to start</span></button>
+              <p class="reflex-score">Best reaction <span data-reflex-best>–</span></p>
+              <p class="visually-hidden" aria-live="polite" data-reflex-live></p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="section contact-section" id="contact" aria-labelledby="contact-title"><div class="contact-inner"><p class="section-tag"><span aria-hidden="true">📬</span> Contact</p><h2 class="contact-title" id="contact-title">Let's build something<br /><span class="grad-text">that holds up.</span></h2><p class="contact-desc">Open to Summer 2027 internships and interesting collaborations. <span aria-hidden="true">🚀</span><br />Got something in mind? Let's talk. <span aria-hidden="true">👋</span></p><a class="btn btn-primary btn-lg" href="mailto:amer.khan@uconn.edu" data-cursor="link" data-burst="💌 ✨ 👋"><span aria-hidden="true">✉️</span> amer.khan@uconn.edu <span class="arrow" aria-hidden="true">↗</span></a><div class="social-row"><a class="social-card" href="https://github.com/amerkhan-dev" target="_blank" rel="noopener noreferrer" data-cursor="view"><span class="social-emoji" aria-hidden="true">🎯</span><span class="social-text"><span class="social-name">GitHub <span aria-hidden="true">↗</span></span><span class="social-handle">@amerkhan-dev</span></span></a><a class="social-card" href="https://www.linkedin.com/in/amer-khan-12a836358/" target="_blank" rel="noopener noreferrer" data-cursor="view"><span class="social-emoji" aria-hidden="true">🧑‍💼</span><span class="social-text"><span class="social-name">LinkedIn <span aria-hidden="true">↗</span></span><span class="social-handle">Amer Khan</span></span></a></div><div class="contact-links"><a href="tel:+16179499003" data-cursor="link"><span aria-hidden="true">📞</span> (617) 949-9003</a><span><span aria-hidden="true">📍</span> Greater Boston &amp; Storrs, CT</span></div></div></section>
     </main>
-    <footer class="footer"><p><span aria-hidden="true">⚡</span> Amer Khan. Made with care. Built to last.</p><a href="#home" data-cursor="link">Back to top <span class="arrow" aria-hidden="true">↑</span></a><p>© 2026</p></footer>
+    <footer class="footer"><p><span aria-hidden="true">⚡</span> Amer Khan. Made with care. Built to last.</p><a href="#home" data-cursor="link">Back to top <span class="arrow" aria-hidden="true">↑</span></a><p>© 2026 <span class="konami-hint" aria-hidden="true" title="Psst… try it on your keyboard">🎮 ↑↑↓↓←→←→BA</span></p></footer>
   </div>
   <div class="scroll-companion" id="scroll-companion" aria-hidden="true">
+  <span class="buddy-pop"></span>
   <p class="buddy-caption">Hey, I’m on it.</p>
   <svg class="buddy-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 190" fill="none" focusable="false">
     <defs>
@@ -256,9 +392,11 @@
       <path d="M40 44c15-9 36-10 50-5" stroke="#fff4ff" stroke-width="3" stroke-linecap="round" opacity=".75"/>
       <path d="M54 49c13-4 30-4 41 0 6 2 9 6 9 13v13c0 8-5 12-11 14-12 3-28 0-38-5-6-3-10-9-10-16v-6c0-6 3-11 9-13Z" fill="#241b38" stroke="#72538f" stroke-width="2"/>
       <path d="M57 53c10-3 26-3 35 0" stroke="#a685cc" stroke-width="1.5" stroke-linecap="round" opacity=".45"/>
-      <g class="buddy-eyes" fill="#b5fff0">
-        <rect x="63" y="63" width="6" height="11" rx="3"/>
-        <rect x="88" y="62" width="6" height="11" rx="3"/>
+      <g class="buddy-gaze">
+        <g class="buddy-eyes" fill="#b5fff0">
+          <rect x="63" y="63" width="6" height="11" rx="3"/>
+          <rect x="88" y="62" width="6" height="11" rx="3"/>
+        </g>
       </g>
       <path d="M77 80c3 2 7 2 10 0" stroke="#e4beff" stroke-width="2" stroke-linecap="round"/>
       <path d="m54 77 4 2m37-2 4-1" stroke="#b887df" stroke-width="2" stroke-linecap="round" opacity=".75"/>
