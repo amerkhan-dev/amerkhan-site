@@ -1,5 +1,7 @@
 @import '@fontsource/ibm-plex-mono/latin-400.css';
 @import './companion.css';
+@import './hobbies.css';
+@import './fx.css';
 @font-face { font-family: 'Space Grotesk Variable'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Inter Variable'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') format('woff2'); }
 /* ---------------------------------------------------------------- */
@@ -165,6 +167,25 @@ img { max-width: 100%; display: block; }
   border-color: var(--violet-300);
 }
 .cursor-ring.is-view .cursor-label { opacity: 1; }
+.cursor-ring.is-label {
+  width: 62px; height: 62px;
+  background: rgba(145, 71, 255, 0.2);
+  border-color: var(--violet-300);
+}
+.cursor-ring.is-label .cursor-label { opacity: 1; }
+/* Over a hobby card, the ring wears that hobby's emoji like a sticker. */
+.cursor-ring.is-emoji { background: rgba(145, 71, 255, 0.1); border-color: rgba(196, 138, 255, 0.75); }
+.cursor-ring.is-emoji .cursor-label {
+  position: absolute;
+  top: -13px; right: -15px;
+  opacity: 1;
+  font: 19px/1 var(--font-body);
+  letter-spacing: 0;
+  text-transform: none;
+  animation: cursor-emoji-in .35s var(--ease);
+}
+@keyframes cursor-emoji-in { from { opacity: 0; transform: scale(.3) rotate(-30deg); } }
+.cursor-ring.is-precise { width: 18px; height: 18px; background: transparent; border-color: rgba(196, 138, 255, 0.7); }
 .cursor-ring.is-down { width: 34px; height: 34px; }
 
 /* ---------------------------------------------------------------- */
@@ -919,6 +940,13 @@ a:hover > .arrow { transform: translate(3px,-3px); }
 .nav { background: rgba(5,3,8,.85); backdrop-filter: blur(18px); border-bottom-color: rgba(196,138,255,.09); }
 .nav-links a { padding-inline: 12px; }
 .nav-links a span.arrow { font: 17px var(--font-body); color: var(--violet-300); }
+.nav-links a .nav-emoji { display: inline-block; font: 13px/1 var(--font-body); filter: drop-shadow(0 0 5px rgba(196, 138, 255, 0.35)); transition: transform .3s var(--ease); }
+.nav-links a:hover .nav-emoji { transform: translateY(-2px) rotate(-10deg) scale(1.15); }
+.numbers-emoji { display: inline-block; margin-right: 7px; font: 13px/1 var(--font-body); }
+.nav-cta { white-space: nowrap; }
+@media (min-width: 861px) and (max-width: 1023px) {
+  .nav-links a .nav-emoji { display: none; }
+}
 .nav-cta { display: inline-flex; align-items: center; gap: 14px; }
 .nav-cta > span { font-size: 20px; }
 .hero { min-height: 810px; padding-top: 155px; padding-bottom: 105px; }
@@ -959,6 +987,9 @@ a:hover > .arrow { transform: translate(3px,-3px); }
 .course-chips { list-style: none; }
 .course-chips li { font-size: 12px; padding: 8px 13px; border-radius: 100px; background: rgba(145,71,255,.07); border: 1px solid rgba(196,138,255,.18); color: var(--text-dim); transition: color .2s,background .2s,border-color .2s; }
 .course-chips li:hover { color: var(--violet-100); background: rgba(145,71,255,.18); border-color: var(--panel-border-hover); }
+/* Chip emoji sit inline; the legacy .course-chips span pill style is for bare spans. */
+.course-chips li > span[aria-hidden="true"],
+.course-chips li > span[aria-hidden="true"]:hover { margin-right: 3px; padding: 0; border: 0; background: none; color: inherit; font-size: inherit; }
 .role-card { padding: 28px; background: linear-gradient(145deg,rgba(255,255,255,.04),rgba(145,71,255,.03)); }
 .role-card h3 { font-size: 20px; line-height: 1.4; letter-spacing: -.04em; margin-bottom: 9px; }
 .role-top { flex-wrap: wrap; gap: 10px; margin-bottom: 21px; }
