@@ -1,0 +1,94 @@
+/* ---------------------------------------------------------------- */
+/* Emoji bursts & rain (see fx.ts)                                    */
+/* ---------------------------------------------------------------- */
+.fx-layer { position: fixed; inset: 0; z-index: 9998; overflow: hidden; pointer-events: none; }
+.fx-particle {
+  position: absolute;
+  left: 0; top: 0;
+  font: 20px/1 var(--font-body);
+  transform: translate(-50%, -50%);
+  animation: fx-burst var(--life, 800ms) cubic-bezier(.15, .75, .35, 1) forwards;
+  user-select: none;
+  will-change: transform, opacity;
+}
+.fx-spark { color: var(--violet-300); font-size: 12px; text-shadow: 0 0 8px rgba(196, 138, 255, .9); }
+@keyframes fx-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+  12% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(var(--scale, 1)); }
+}
+.fx-rain {
+  font-size: var(--size, 24px);
+  animation: fx-rain var(--life, 3s) cubic-bezier(.45, .05, .55, .95) var(--delay, 0ms) both;
+}
+@keyframes fx-rain {
+  from { opacity: 1; transform: translate(-50%, 0) rotate(0deg); }
+  to { opacity: .85; transform: translate(calc(-50% + var(--drift, 0px)), calc(100vh + 90px)) rotate(var(--rot)); }
+}
+
+/* ---------------------------------------------------------------- */
+/* Scroll reveal: only after JavaScript has promised to undo it.      */
+/* ---------------------------------------------------------------- */
+html.reveal-ready .reveal:not(.is-revealed) { opacity: 0; translate: 0 28px; }
+html.reveal-ready .reveal.is-revealed { animation: reveal-in .8s var(--ease) var(--reveal-delay, 0ms) both; }
+@keyframes reveal-in {
+  from { opacity: 0; translate: 0 28px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+/* ---------------------------------------------------------------- */
+/* Small delights                                                     */
+/* ---------------------------------------------------------------- */
+.section-tag > span[aria-hidden="true"] { display: inline-block; }
+.section-tag:hover > span[aria-hidden="true"] { animation: hobby-bob .7s var(--ease); }
+
+.name-spark { cursor: pointer; user-select: none; }
+.name-spark.is-emoji { font-size: .38em; margin-top: 16px; }
+.hero-name:hover .name-spark.is-emoji { transform: rotate(-12deg) scale(1.12); }
+.name-spark.is-popping { animation: spark-pop .5s var(--ease); }
+@keyframes spark-pop {
+  0% { transform: scale(.4) rotate(-40deg); }
+  60% { transform: scale(1.25) rotate(10deg); }
+  100% { transform: none; }
+}
+
+.hero-offclock { margin-top: 16px; }
+.hero-hobbies {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px 6px 14px;
+  border: 1px solid rgba(196, 138, 255, .22);
+  border-radius: 100px;
+  background: rgba(145, 71, 255, .07);
+  color: var(--violet-100);
+  font: 12px var(--font-mono);
+  transition: border-color .25s, background .25s;
+}
+.hero-hobbies:hover { border-color: var(--panel-border-hover); background: rgba(145, 71, 255, .16); }
+.hero-hobbies-emoji { display: inline-flex; gap: 5px; font: 15px/1 var(--font-body); }
+.hero-hobbies-emoji span { display: inline-block; }
+.hero-hobbies:hover .hero-hobbies-emoji span { animation: hero-hop .6s var(--ease) both; }
+.hero-hobbies:hover .hero-hobbies-emoji span:nth-child(2) { animation-delay: .06s; }
+.hero-hobbies:hover .hero-hobbies-emoji span:nth-child(3) { animation-delay: .12s; }
+.hero-hobbies:hover .hero-hobbies-emoji span:nth-child(4) { animation-delay: .18s; }
+.hero-hobbies:hover .hero-hobbies-emoji span:nth-child(5) { animation-delay: .24s; }
+@keyframes hero-hop { 40% { transform: translateY(-6px) rotate(-8deg); } }
+.hero-hobbies .arrow { font-size: 18px; color: var(--violet-300); }
+
+.konami-hint { margin-left: 10px; color: #6f6585; font: 10px var(--font-mono); letter-spacing: .08em; transition: color .3s; }
+.konami-hint:hover { color: var(--violet-300); }
+
+@media (max-width: 600px) {
+  .hero-hobbies { font-size: 11px; gap: 9px; }
+  .hero-hobbies-emoji { font-size: 13px; gap: 3px; }
+  .konami-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-ready .reveal { opacity: 1 !important; translate: none !important; }
+  .fx-layer { display: none; }
+}
+@media print {
+  .fx-layer { display: none !important; }
+  .reveal { opacity: 1 !important; translate: none !important; animation: none !important; }
+}

@@ -1,0 +1,554 @@
+/* ---------------------------------------------------------------- */
+/* Hobbies & free time                                               */
+/* ---------------------------------------------------------------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Emoji ticker: a decorative, pausable band leading into the section. */
+.emoji-ticker {
+  max-width: var(--container);
+  margin: 110px auto 0;
+  padding: 4px 32px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 42s linear infinite;
+}
+.ticker-track span {
+  flex: none;
+  margin-right: 12px;
+  padding: 9px 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(196, 138, 255, .18);
+  background: rgba(145, 71, 255, .07);
+  color: var(--violet-100);
+  font: 12px/1.4 var(--font-mono);
+  white-space: nowrap;
+}
+.emoji-ticker:hover .ticker-track { animation-play-state: paused; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+.hobbies-section { padding-top: 64px; }
+
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.hobby-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 30px;
+  border: 1px solid var(--panel-border);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(145, 71, 255, .08), rgba(255, 255, 255, .022));
+  overflow: hidden;
+  transition: border-color .35s var(--ease), box-shadow .35s var(--ease);
+}
+.hobby-card[data-tilt] { transform: none; }
+.hobby-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(176, 117, 255, .13), transparent 65%);
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+.hobby-card:hover { border-color: var(--panel-border-hover); box-shadow: 0 26px 50px -30px rgba(145, 71, 255, .6); }
+.hobby-card:hover::before { opacity: 1; }
+.hobby-card > * { position: relative; }
+
+.hobby-poker {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 36px;
+  align-items: start;
+}
+
+/* Without JavaScript the table stays hidden, so the copy takes the full card. */
+.hobby-poker:has(> .poker-table[hidden]) { grid-template-columns: minmax(0, 1fr); }
+
+.hobby-kicker {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 16px;
+  color: var(--violet-300);
+  font: 12px var(--font-mono);
+  letter-spacing: .04em;
+}
+.hobby-emoji {
+  display: inline-grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  border-radius: 12px;
+  border: 1px solid rgba(196, 138, 255, .22);
+  background: rgba(145, 71, 255, .16);
+  font: 18px/1 var(--font-body);
+}
+.hobby-emoji-suit { color: var(--violet-300); font: 21px/1 "Segoe UI Symbol", "Apple Symbols", "DejaVu Sans", sans-serif; }
+.hobby-card:hover .hobby-emoji { animation: hobby-bob .7s var(--ease); }
+.hobby-card:hover .hobby-emoji-jab { animation: hobby-jab .6s var(--ease); }
+@keyframes hobby-bob {
+  0%, 100% { transform: none; }
+  35% { transform: translateY(-5px) rotate(-10deg) scale(1.12); }
+  70% { transform: translateY(1px) rotate(6deg); }
+}
+@keyframes hobby-jab {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(10px) rotate(-10deg) scale(1.2); }
+  45% { transform: translateX(-2px); }
+  65% { transform: translateX(7px) rotate(-6deg) scale(1.12); }
+}
+
+.hobby-card h3 { font-size: 23px; line-height: 1.25; letter-spacing: -.035em; margin-bottom: 12px; }
+.hobby-desc { font-size: 14px; line-height: 1.8; color: var(--text-dim); margin-bottom: 20px; }
+.hobby-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.hobby-tags li {
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, .035);
+  color: var(--text-dim);
+  font: 10px/1.7 var(--font-mono);
+  transition: color .2s, border-color .2s, background .2s;
+}
+.hobby-tags li:hover { color: var(--violet-100); border-color: var(--panel-border-hover); background: rgba(145, 71, 255, .16); }
+.hobby-card > .hobby-tags { margin-bottom: 22px; }
+
+/* Shared controls */
+.hobby-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.hobby-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 18px;
+  border: 1px solid rgba(196, 138, 255, .45);
+  border-radius: 100px;
+  background: linear-gradient(110deg, #7a2ff2, #6421c5);
+  box-shadow: 0 10px 24px -12px rgba(145, 71, 255, .85);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, border-color .25s;
+}
+.hobby-button:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(145, 71, 255, 1); }
+.hobby-button:active { transform: scale(.96); }
+.hobby-button:disabled { opacity: .55; cursor: default; transform: none; box-shadow: none; }
+.hobby-button-ghost { border-color: var(--panel-border); background: rgba(145, 71, 255, .1); box-shadow: none; color: var(--violet-100); }
+.hobby-button-ghost:hover { border-color: var(--panel-border-hover); background: rgba(145, 71, 255, .2); box-shadow: none; }
+
+/* ---------------------------------------------------------------- */
+/* Poker table                                                       */
+/* ---------------------------------------------------------------- */
+.poker-table { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-content: start; }
+.poker-top { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); gap: 22px; align-items: center; }
+.poker-readout { display: grid; align-content: center; }
+.poker-readout .hobby-button { justify-self: start; margin-top: 14px; }
+.poker-felt {
+  padding: 22px 20px 18px;
+  border: 1px solid rgba(196, 138, 255, .25);
+  border-radius: 20px;
+  background: radial-gradient(120% 95% at 50% 0%, rgba(145, 71, 255, .38), rgba(46, 16, 92, .55) 55%, rgba(12, 7, 24, .85));
+  box-shadow: inset 0 0 0 6px rgba(8, 4, 16, .35), inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+.poker-cards { display: flex; justify-content: center; gap: 14px; margin-bottom: 18px; perspective: 700px; }
+.playing-card { display: block; width: 74px; height: 104px; }
+.playing-card:nth-child(1) { rotate: -5deg; }
+.playing-card:nth-child(2) { rotate: 5deg; translate: 0 4px; }
+.card-inner {
+  position: relative;
+  display: block;
+  width: 100%; height: 100%;
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  transition: transform .5s var(--ease);
+}
+.playing-card.is-up .card-inner { transform: rotateY(0deg); }
+.card-front, .card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: linear-gradient(160deg, #fff, #eee6ff);
+  box-shadow: 0 12px 22px -10px rgba(0, 0, 0, .7);
+  color: #1b1426;
+}
+.playing-card.is-red .card-front { color: #d92d4d; }
+.card-rank { font: 700 31px/1 var(--font-display); letter-spacing: -.05em; }
+.card-suit { font: 27px/1 "Segoe UI Symbol", "Apple Symbols", "DejaVu Sans", sans-serif; }
+.card-back {
+  transform: rotateY(180deg);
+  border: 3px solid #efe6ff;
+  background: repeating-linear-gradient(45deg, #5b1fc9 0 6px, #6c2ce6 6px 12px);
+  box-shadow: 0 12px 22px -10px rgba(0, 0, 0, .7);
+}
+.card-back::after {
+  content: "♠\FE0E";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, .55);
+  font: 30px/1 "Segoe UI Symbol", "Apple Symbols", "DejaVu Sans", sans-serif;
+}
+/* One hue: the track is a lighter step of the fill's own ramp. */
+.poker-meter { position: relative; height: 8px; border-radius: 100px; background: rgba(162, 89, 255, .2); overflow: hidden; }
+.poker-meter-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--violet-glow);
+  transition: width .12s linear;
+}
+.poker-meter-mark { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: rgba(255, 255, 255, .45); }
+.poker-equity { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+.poker-equity-value {
+  min-width: 3.4ch;
+  color: var(--violet-100);
+  font: 700 42px/1 var(--font-display);
+  letter-spacing: -.045em;
+  font-variant-numeric: tabular-nums;
+}
+.poker-table:not([data-state]) .poker-equity-value { color: #6f6585; }
+.poker-equity-label { color: var(--text-dimmer); font: 11px var(--font-mono); }
+.poker-hand { min-height: 1.6em; margin-top: 10px; color: var(--text); font-size: 14px; font-weight: 600; }
+.poker-sims { margin-top: 6px; color: #b2a8c4; font: 11px/1.75 var(--font-mono); }
+.poker-sims a { color: var(--violet-300); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Convergence chart */
+.poker-chart {
+  margin: 0;
+  padding: 14px 16px 10px;
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  background: rgba(8, 4, 16, .35);
+}
+.poker-chart-title { margin-bottom: 8px; color: var(--text-dim); font: 11px var(--font-mono); }
+.poker-chart-title span { color: var(--text-dimmer); }
+.poker-chart-plot { position: relative; height: 128px; border-radius: 8px; touch-action: pan-y; outline-offset: 6px; }
+/* The chart is drawn at the plot's measured width; CSS keeps the SVG from
+   ever widening its own container (an unsized SVG defaults to 300px). */
+.equity-svg { display: block; width: 100%; overflow: visible; }
+.equity-grid { stroke: rgba(255, 255, 255, .07); stroke-width: 1; }
+.equity-axis { stroke: rgba(255, 255, 255, .16); stroke-width: 1; }
+.equity-tick, .equity-empty { fill: #978dae; font: 10px var(--font-mono); }
+.equity-empty { font-size: 11px; }
+.equity-band { opacity: .16; }
+.equity-line { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.equity-dot { stroke: #140d22; stroke-width: 2; }
+.equity-end { fill: var(--text); font: 11px var(--font-mono); }
+.equity-crosshair { stroke: rgba(255, 255, 255, .4); stroke-width: 1; }
+.equity-tip {
+  position: absolute;
+  top: -4px;
+  z-index: 2;
+  display: grid;
+  gap: 1px;
+  padding: 6px 10px;
+  border: 1px solid rgba(196, 138, 255, .35);
+  border-radius: 9px;
+  background: #211538;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .6);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+}
+.equity-tip strong { color: var(--text); font: 600 13px var(--font-body); }
+.equity-tip span { color: var(--text-dim); font: 10px var(--font-mono); }
+
+/* ---------------------------------------------------------------- */
+/* Lifting                                                           */
+/* ---------------------------------------------------------------- */
+.lift-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 20px; }
+.lift-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  padding: 14px 12px;
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  background: var(--panel);
+}
+.lift-stat-hero { border-color: rgba(196, 138, 255, .4); background: linear-gradient(135deg, rgba(145, 71, 255, .24), rgba(225, 75, 255, .08)); }
+.lift-value { color: var(--violet-100); font: 700 22px/1.1 var(--font-display); letter-spacing: -.03em; white-space: nowrap; }
+.lift-label { color: var(--text-dim); font-size: 11px; line-height: 1.4; }
+
+.barbell { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: auto; }
+.barbell-art { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; overflow: visible; }
+.barbell-shadow { fill: rgba(0, 0, 0, .4); }
+.barbell-shaft { fill: #b9b2c8; }
+.barbell-knurl { stroke: #7d7590; stroke-width: 1; }
+.barbell-sleeve { fill: #ddd7e8; }
+.barbell-collar { fill: #8e86a3; }
+.barbell-half {
+  transform-box: view-box;
+  transform-origin: 180px 65px;
+  transition: transform .7s cubic-bezier(.34, 1.56, .64, 1);
+}
+.barbell-half-left { transform: rotate(calc(var(--bend, 0) * -1deg)); }
+.barbell-half-right { transform: rotate(calc(var(--bend, 0) * 1deg)); }
+.plate { stroke: rgba(10, 5, 20, .65); stroke-width: 1; transform-box: fill-box; }
+.plate-45 { fill: #7a2ff2; }
+.plate-5 { fill: #e14bff; }
+.plate-2-5 { fill: #c9a8ff; }
+.plate-in-left { animation: plate-in-left .45s cubic-bezier(.34, 1.56, .64, 1) both; }
+.plate-in-right { animation: plate-in-right .45s cubic-bezier(.34, 1.56, .64, 1) both; }
+@keyframes plate-in-left { from { opacity: 0; transform: translateX(-26px); } }
+@keyframes plate-in-right { from { opacity: 0; transform: translateX(26px); } }
+.barbell-readout { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
+.barbell-total { color: var(--violet-100); font: 700 34px/1 var(--font-display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.barbell-unit { color: var(--text-dimmer); font-size: 15px; letter-spacing: 0; }
+.barbell-note { color: var(--text-dim); font-size: 12.5px; }
+.barbell[data-total="330"] .barbell-total, .barbell[data-total="340"] .barbell-total { color: #7ef7a8; }
+
+/* ---------------------------------------------------------------- */
+/* Cube                                                              */
+/* ---------------------------------------------------------------- */
+/* The stage absorbs spare card height so the cube sits centered in it. */
+.cube-widget { display: grid; flex: 1; grid-template-rows: minmax(232px, 1fr) auto auto auto; justify-items: center; gap: 10px; }
+.cube-stage {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  min-height: 232px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 54%, rgba(145, 71, 255, .2), transparent 62%);
+  perspective: 760px;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.cube-stage.is-dragging { cursor: grabbing; }
+.cube { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.cubie { position: absolute; left: -23px; top: -23px; width: 46px; height: 46px; transform-style: preserve-3d; }
+.cubie-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  background: #130d1f;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.cubie-face[class*="sticker-"]::after {
+  content: "";
+  position: absolute;
+  inset: 3.5px;
+  border-radius: 6px;
+  background: var(--sticker);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .16), inset 0 2px 0 rgba(255, 255, 255, .35);
+}
+.sticker-U { --sticker: #f7f4ff; }
+.sticker-D { --sticker: #ffd43b; }
+.sticker-F { --sticker: #22c55e; }
+.sticker-B { --sticker: #3b82f6; }
+.sticker-R { --sticker: #ef4444; }
+.sticker-L { --sticker: #fb923c; }
+.cube-status { color: var(--text); font-size: 13px; font-weight: 600; }
+.cube-tape {
+  max-width: 100%;
+  min-height: 1.7em;
+  overflow: hidden;
+  color: var(--violet-300);
+  font: 11px/1.7 var(--font-mono);
+  letter-spacing: .06em;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cube-widget .hobby-actions { justify-content: center; }
+
+/* ---------------------------------------------------------------- */
+/* Soccer & basketball                                               */
+/* ---------------------------------------------------------------- */
+.hobby-badges { display: grid; gap: 8px; margin-bottom: 22px; }
+.hobby-badges li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.hobby-badges li:first-child {
+  border-color: rgba(255, 207, 122, .38);
+  background: linear-gradient(120deg, rgba(255, 207, 122, .15), rgba(145, 71, 255, .08));
+  color: #ffe7b8;
+  font-weight: 600;
+}
+.keepy { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: auto; }
+.keepy-pitch {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(8, 4, 16, .35), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(126, 247, 168, .075) 0 30px, rgba(126, 247, 168, .035) 30px 60px);
+}
+.keepy-pitch::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 10px;
+  background: linear-gradient(180deg, rgba(126, 247, 168, .3), rgba(126, 247, 168, .12));
+}
+.keepy-goal {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  width: 52px;
+  height: 36px;
+  border: 2px solid rgba(255, 255, 255, .32);
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .1) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .1) 0 1px, transparent 1px 6px);
+}
+.keepy-ball {
+  position: absolute;
+  left: calc(50% - 23px);
+  bottom: 10px;
+  z-index: 1;
+  width: 46px; height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  font: 40px/46px var(--font-body);
+  cursor: pointer;
+  will-change: transform;
+}
+.keepy-ball > span { display: block; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .45)); }
+.keepy-shadow {
+  position: absolute;
+  left: calc(50% - 18px);
+  bottom: 6px;
+  width: 36px; height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .6);
+  filter: blur(2px);
+  opacity: .6;
+}
+.keepy-score { color: var(--text-dim); font: 12px var(--font-mono); }
+.keepy-count { color: var(--violet-100); font-size: 16px; font-weight: 600; }
+.keepy-hint { color: var(--text-dimmer); font-size: 11.5px; line-height: 1.6; }
+
+/* ---------------------------------------------------------------- */
+/* MMA reflex check                                                  */
+/* ---------------------------------------------------------------- */
+.reflex { display: grid; flex: 1; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(150px, 1fr) auto; gap: 8px; }
+.reflex-pad {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  padding: 18px;
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .03);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, box-shadow .15s, transform .15s;
+}
+.reflex-pad:hover { border-color: var(--panel-border-hover); }
+.reflex-pad:active { transform: scale(.985); }
+.reflex-emoji { font: 42px/1 var(--font-body); transition: transform .2s var(--ease), filter .2s; }
+.reflex-pad[data-state="waiting"] { border-color: rgba(255, 92, 122, .45); background: rgba(255, 92, 122, .12); }
+.reflex-pad[data-state="waiting"] .reflex-emoji { filter: grayscale(1) brightness(.7); }
+.reflex-pad[data-state="go"] {
+  border-color: rgba(126, 247, 168, .7);
+  background: rgba(126, 247, 168, .16);
+  box-shadow: 0 0 42px -8px rgba(126, 247, 168, .65);
+}
+.reflex-pad[data-state="go"] .reflex-emoji { transform: scale(1.4) rotate(-12deg); }
+.reflex-pad[data-state="early"] { border-color: rgba(255, 190, 92, .45); background: rgba(255, 190, 92, .1); }
+.reflex-pad[data-state="done"] { border-color: rgba(196, 138, 255, .5); background: rgba(145, 71, 255, .12); }
+.reflex-score { color: var(--text-dim); font: 12px var(--font-mono); }
+
+/* ---------------------------------------------------------------- */
+/* Responsive                                                        */
+/* ---------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .hobby-poker { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+}
+@media (max-width: 860px) {
+  .hobby-card { padding: 25px; }
+  .hobby-grid { gap: 17px; }
+}
+@media (max-width: 700px) {
+  .hobby-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .hobby-poker { gap: 22px; }
+}
+@media (max-width: 560px) {
+  .poker-top { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .poker-chart { padding-inline: 10px; }
+}
+@media (max-width: 600px) {
+  .emoji-ticker { margin-top: 70px; padding-inline: 20px; }
+  #hobbies.hobbies-section { padding-top: 44px; }
+  .hobby-card { border-radius: 19px; }
+  .hobby-card h3 { font-size: 22px; }
+  .lift-stat { padding: 12px 10px; }
+  .lift-value { font-size: 20px; }
+}
+@media (max-width: 359px) {
+  .hobby-card { padding: 21px; }
+  .playing-card { width: 64px; height: 92px; }
+  .lift-stats { grid-template-columns: 1fr 1fr; }
+  .lift-stat-hero { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .emoji-ticker { -webkit-mask-image: none; mask-image: none; }
+  .ticker-track { flex-wrap: wrap; width: auto; row-gap: 10px; }
+  .ticker-track span:nth-child(n + 9) { display: none; }
+}
+@media print {
+  .emoji-ticker, .poker-table, .barbell, .cube-widget, .keepy, .reflex { display: none !important; }
+}

@@ -1,4 +1,6 @@
 import { initCompanion } from './companion';
+import { initFx } from './fx';
+import { initHobbies } from './hobbies';
 
 // All portfolio content and final metrics are present in the HTML. JavaScript
 // adds controls only after their handlers are attached; it never loads copy.
@@ -191,7 +193,7 @@ function initCursor() {
     lastFrame = 0;
     tracking = false;
     root.classList.remove("cursor-active");
-    ring.classList.remove("is-link", "is-view", "is-down");
+    ring.classList.remove("is-link", "is-view", "is-label", "is-emoji", "is-precise", "is-down");
     label.textContent = "";
   };
   const tick = (now: number) => {
@@ -213,11 +215,19 @@ function initCursor() {
     if (!settled) frame = window.requestAnimationFrame(tick);
   };
   const setHover = (target: EventTarget | null) => {
-    const interactive = target instanceof Element ? target.closest("a, button, [data-cursor]") : null;
+    const element = target instanceof Element ? target : null;
+    const interactive = element?.closest("a, button, [data-cursor]") ?? null;
+    // Outside controls, a hobby card can dress the ring in its own emoji.
+    const emoji = interactive ? "" : element?.closest("[data-cursor-emoji]")?.getAttribute("data-cursor-emoji") ?? "";
     const view = interactive?.getAttribute("data-cursor") === "view";
+    const custom = interactive?.getAttribute("data-cursor-label") ?? "";
     ring.classList.toggle("is-link", Boolean(interactive));
-    ring.classList.toggle("is-view", view);
-    label.textContent = view ? "View" : "";
+    ring.classList.toggle("is-view", view && !custom);
+    ring.classList.toggle("is-label", Boolean(custom));
+    ring.classList.toggle("is-emoji", Boolean(emoji));
+    // Over a chart the ring shrinks so it never hides the data being read.
+    ring.classList.toggle("is-precise", interactive?.getAttribute("data-cursor") === "chart");
+    label.textContent = emoji || custom || (view ? "View" : "");
   };
 
   document.addEventListener("pointermove", (event) => {
@@ -265,6 +275,9 @@ function initTilt() {
   const resets: Array<() => void> = [];
 
   document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((element) => {
+    // data-tilt="flat" keeps the pointer spotlight without the 3D tilt, for
+    // cards whose widgets need a steady surface.
+    const flat = element.dataset.tilt === "flat";
     let frame = 0;
     let x = 0;
     let y = 0;
@@ -285,8 +298,10 @@ function initTilt() {
         if (!rect.width || !rect.height) return;
         const localX = Math.max(0, Math.min(rect.width, x - rect.left));
         const localY = Math.max(0, Math.min(rect.height, y - rect.top));
-        element.style.setProperty("--tilt-x", `${(0.5 - localY / rect.height) * 5}deg`);
-        element.style.setProperty("--tilt-y", `${(localX / rect.width - 0.5) * 5}deg`);
+        if (!flat) {
+          element.style.setProperty("--tilt-x", `${(0.5 - localY / rect.height) * 5}deg`);
+          element.style.setProperty("--tilt-y", `${(localX / rect.width - 0.5) * 5}deg`);
+        }
         element.style.setProperty("--mx", `${localX}px`);
         element.style.setProperty("--my", `${localY}px`);
       });
@@ -327,5 +342,7 @@ initCounters();
 initCursor();
 initTilt();
 initScrollProgress();
+initHobbies();
+initFx();
 
 initCompanion();
