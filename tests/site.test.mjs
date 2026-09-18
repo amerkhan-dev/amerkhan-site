@@ -6,12 +6,43 @@ import ts from 'typescript';
 
 const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
 const html = read('../index.html');
-// Exercise both production modules in one browser realm, without Vite's CSS loader.
-const source = read('../src/companion.ts').replace(/\bexport\s+(?=function\s+initCompanion\b)/, '') + '\n'
-  + read('../src/main.ts').replace(/^import\s+(?:\{\s*initCompanion\s*\}\s+from\s+)?['"][^'"]+['"];?\s*$/gm, '');
-const script = ts.transpileModule(source, {
-  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.None },
+// Every production module, transpiled to CommonJS and linked by a tiny
+// require() so the whole app runs in one browser realm without Vite.
+const MODULES = ['poker', 'cube', 'fx', 'equity-chart', 'hobbies', 'companion', 'main'];
+const compile = (name) => ts.transpileModule(read(`../src/${name}.ts`), {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
 }).outputText;
+const script = `(() => {
+  const factories = {};
+  const cache = {};
+  const require = (id) => {
+    const name = id.replace(/^\\.\\//, '').replace(/\\.ts$/, '');
+    if (!cache[name]) {
+      cache[name] = { exports: {} };
+      factories[name](cache[name], cache[name].exports, require);
+    }
+    return cache[name].exports;
+  };
+  ${MODULES.map((name) => `factories[${JSON.stringify(name)}] = (module, exports, require) => {\n${compile(name)}\n};`).join('\n')}
+  require('./main');
+})();`;
+
+/** Loads a DOM-free module (the poker engine, the cube model) straight into Node. */
+function load(name) {
+  const module = { exports: {} };
+  new Function('module', 'exports', 'require', compile(name))(module, module.exports, (id) => load(id.replace(/^\.\//, '')));
+  return module.exports;
+}
+
+/** A seeded PRNG (mulberry32) so simulations in tests are repeatable. */
+function seeded(seed) {
+  return () => {
+    seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
 function fakeClock(window) {
   let now = 0;
@@ -390,7 +421,7 @@ test('companion reacts to continued scrolling, updates its decorative caption, a
   assert.equal(buddy.classList.contains('motion-enabled'), true);
   assert.equal(buddy.classList.contains('is-scrolling'), false);
   visibility.enter([element(document, '#projects')]);
-  assert.equal(element(document, '.buddy-caption').textContent, 'Shipping things.');
+  assert.equal(element(document, '.buddy-caption').textContent, 'Shipping things. 🚀');
   window.dispatchEvent(new window.Event('scroll'));
   assert.equal(buddy.classList.contains('is-scrolling'), true);
   clock.advance(150);
@@ -417,4 +448,305 @@ test('reduced motion disables companion gestures initially and during scrolling'
     assert.equal(buddy.classList.contains('is-scrolling'), false);
     assert.equal(clock.pending(), 0);
   }
+});
+
+/* ------------------------------------------------------------------ */
+/* Hobbies & free time                                                  */
+/* ------------------------------------------------------------------ */
+const WIDGETS = ['[data-poker]', '[data-barbell]', '[data-cube]', '[data-keepy]', '[data-reflex]'];
+const squash = (text) => text.replace(/\s+/g, ' ');
+
+test('hobbies section states the confirmed facts and reads fully without JavaScript', (t) => {
+  const { document } = setup(t, { javascript: false });
+  const section = element(document, '#hobbies');
+  assert.equal(section.getAttribute('aria-labelledby'), 'hobbies-title');
+  assert.ok(document.querySelector('#primary-navigation a[href="#hobbies"]'), 'The navigation links to the section');
+  const cards = [...section.querySelectorAll('.hobby-card')];
+  assert.equal(cards.length, 5);
+  for (const card of cards) {
+    const title = document.getElementById(card.getAttribute('aria-labelledby'));
+    assert.ok(title?.tagName === 'H3' && card.contains(title), 'Each hobby card is labelled by its own heading');
+  }
+  const text = squash(section.textContent);
+  for (const fact of ['decision-making under uncertainty', 'expected value', 'pot odds', '2× bodyweight bench',
+    'bench press twice my bodyweight', '340+ lb bench at 165 lb', 'lifting and powerlifting', "Rubik's Cube", 'MMA and martial arts',
+    'Three-year varsity soccer athlete', 'MetroWest Academic All-Star for the 2024–25 season', 'intramural soccer and basketball']) {
+    assert.ok(text.includes(fact), `The hobbies copy should include “${fact}”`);
+  }
+  assert.doesNotMatch(text, /intermural/i, 'Intramural is spelled correctly');
+  for (const selector of WIDGETS) {
+    assert.equal(element(document, selector).hidden, true, `${selector} needs JavaScript, so it starts hidden`);
+  }
+  assert.equal(element(document, '.emoji-ticker').getAttribute('aria-hidden'), 'true', 'The ticker repeats the cards and stays decorative');
+});
+
+test('enhancement reveals every hobby widget with native controls, and nothing animates until used', (t) => {
+  const { document, clock } = setup(t);
+  for (const selector of WIDGETS) assert.equal(element(document, selector).hidden, false, `${selector} is revealed`);
+  for (const button of document.querySelectorAll('#hobbies button')) {
+    assert.equal(button.type, 'button');
+    assert.ok(button.textContent.trim() || button.getAttribute('aria-label'), 'Every control has a name');
+  }
+  assert.equal(document.querySelectorAll('[data-cube-stage] .cubie').length, 26, 'The cube is built from 26 pieces');
+  assert.equal(clock.pending(), 0, 'Widgets schedule no work before a visitor interacts');
+});
+
+test('hand evaluator matches exact five-card category counts and ranks showdowns correctly', () => {
+  const { evaluate, categoryOf } = load('poker');
+  const counts = {};
+  const hand = new Uint8Array(5);
+  for (let a = 0; a < 52; a++) for (let b = a + 1; b < 52; b++) for (let c = b + 1; c < 52; c++)
+    for (let d = c + 1; d < 52; d++) for (let e = d + 1; e < 52; e++) {
+      hand[0] = a; hand[1] = b; hand[2] = c; hand[3] = d; hand[4] = e;
+      const category = categoryOf(evaluate(hand, 5));
+      counts[category] = (counts[category] ?? 0) + 1;
+    }
+  assert.deepEqual(counts, {
+    'Straight flush': 40, 'Four of a kind': 624, 'Full house': 3744, Flush: 5108, Straight: 10200,
+    'Three of a kind': 54912, 'Two pair': 123552, Pair: 1098240, 'High card': 1302540,
+  });
+
+  const card = (text) => '23456789TJQKA'.indexOf(text[0]) * 4 + 'shdc'.indexOf(text[1]);
+  const score = (text) => evaluate(text.split(' ').map(card));
+  const beats = (a, b, message) => assert.ok(score(a) > score(b), message);
+  beats('As Ks Qs Js Ts 2d 3c', 'Ah Ad Ac As Kd 2c 3h', 'A royal flush beats quads');
+  beats('6h 5d 4c 3s 2h Kd Kc', 'Ah 2d 3c 4s 5h Kh Qc', 'A six-high straight beats the wheel');
+  beats('2h 7h 9h Jh Kh Ac Ad', 'Th Jd Qc Ks Ah 2c 3d', 'A flush beats a straight');
+  beats('Kh Kd Kc 2s 2h 9h 8h', 'Ah Qh 9h 7h 3h Kd Kc', 'A full house beats a flush');
+  beats('Ah Ad Kc Kd 9s 3c 2h', 'Ah Ad Kc Kd 8s 3c 2h', 'Two pair plays its best kicker');
+  beats('Kh Kd Kc Qs Qh Qd 2c', 'Kh Kd Kc Js Jh Jd Ac', 'Two sets make a full house with the lower set as the pair');
+  assert.equal(score('Ah Kd 7c 7s 2h 2d 9c'), score('Ad Kc 7h 7d 2s 2c 9h'), 'Identical ranks split the pot');
+  assert.equal(categoryOf(score('As 2s 3s 4s 5s Kd Kc')), 'Straight flush', 'The wheel can be a straight flush');
+});
+
+test('Monte Carlo equity lands on published preflop values with a seeded shuffle', () => {
+  const { simulate, equityOf, describeHole } = load('poker');
+  const card = (text) => '23456789TJQKA'.indexOf(text[0]) * 4 + 'shdc'.indexOf(text[1]);
+  for (const [hand, published] of [[['As', 'Ah'], 0.852], [['Ks', 'Kh'], 0.824], [['As', 'Ks'], 0.670], [['7s', '2h'], 0.346]]) {
+    const hole = hand.map(card);
+    const equity = equityOf(simulate(hole, 60000, undefined, seeded(hole[0] * 53 + hole[1])));
+    assert.ok(Math.abs(equity - published) < 0.008, `${hand.join('')} ≈ ${published}, got ${equity.toFixed(4)}`);
+  }
+  assert.equal(describeHole([card('Ks'), card('As')]).short, 'AKs');
+  assert.equal(describeHole([card('7d'), card('2c')]).short, '72o');
+  assert.equal(describeHole([card('Qd'), card('Qc')]).long, 'Pocket Queens');
+});
+
+test('cube model: face turns have order four, known algorithms return home, scrambles undo exactly', () => {
+  const { createCube, applyMove, isSolved, parseMoves, invert, scramble, pushSimplified, FACES } = load('cube');
+  const order = (algorithm) => {
+    const cube = createCube();
+    for (let n = 1; n <= 2000; n++) {
+      parseMoves(algorithm).forEach((move) => applyMove(cube, move));
+      if (isSolved(cube)) return n;
+    }
+    return -1;
+  };
+  for (const face of FACES) assert.equal(order(face), 4, `${face} has order 4`);
+  assert.equal(order("R U R' U'"), 6);
+  assert.equal(order('R U'), 105);
+  assert.equal(order("R U R' U' R' F R2 U' R' U' R U R' F'"), 2, 'The T-permutation swaps pieces and swaps them back');
+  const random = seeded(2028);
+  for (let i = 0; i < 200; i++) {
+    const cube = createCube();
+    const history = [];
+    for (const move of scramble(20, random)) {
+      applyMove(cube, move);
+      pushSimplified(history, move);
+    }
+    assert.equal(isSolved(cube), false);
+    for (const move of invert(history)) {
+      applyMove(cube, move);
+      pushSimplified(history, move);
+    }
+    assert.ok(isSolved(cube) && history.length === 0, 'Undoing a scramble solves the cube and empties its history');
+  }
+});
+
+test('poker table deals, replays the convergence, and settles with an accessible summary', (t) => {
+  for (const reduced of [false, true]) {
+    const { document, clock } = setup(t, { reduced });
+    const table = element(document, '[data-poker]');
+    element(document, '[data-poker-deal]').click();
+    if (!reduced) assert.ok(clock.pending() > 0, 'Dealing animates the cards and the estimate');
+    clock.drain();
+    assert.equal(table.dataset.state, 'done');
+    assert.match(element(document, '[data-poker-equity]').textContent, /^\d{1,2}\.\d%$/);
+    assert.ok([...document.querySelectorAll('.playing-card')].every((card) => card.classList.contains('is-up')));
+    assert.match(element(document, '[data-poker-live]').textContent, /percent equity against a random hand over 20,000 simulations\.$/);
+    assert.equal(document.querySelectorAll('[data-poker-table] tr').length, 5, 'Checkpoints are available as a table');
+    assert.ok(document.querySelector('[data-poker-chart] .equity-line'), 'The convergence line is drawn');
+    assert.ok(document.querySelector('[data-poker-hand] [aria-hidden="true"]'), 'Emoji in the hand summary stay decorative');
+    assert.equal(clock.pending(), 0, 'A settled table leaves no animation running');
+  }
+});
+
+test('barbell loads to twice the 165 lb bodyweight, then the 340 lb target', (t) => {
+  const { document, clock } = setup(t);
+  const add = element(document, '[data-barbell-add]');
+  const total = element(document, '[data-barbell-total]');
+  assert.equal(total.textContent, '45');
+  const seen = [];
+  for (let i = 0; i < 5; i++) {
+    add.click();
+    clock.drain();
+    seen.push(total.textContent);
+  }
+  assert.deepEqual(seen, ['135', '225', '315', '325', '330']);
+  assert.match(element(document, '[data-barbell-note]').textContent, /330 lb = 2 × my 165 lb bodyweight/);
+  assert.match(element(document, '[data-barbell-live]').textContent, /twice my 165 pound bodyweight/);
+  add.click();
+  clock.drain();
+  assert.equal(total.textContent, '340');
+  assert.equal(add.disabled, true, 'The sequence ends at the next target');
+  assert.equal(document.querySelectorAll('[data-plates] .plate').length, 12);
+  element(document, '[data-barbell-reset]').click();
+  clock.drain();
+  assert.equal(total.textContent, '45');
+  assert.equal(document.querySelectorAll('[data-plates] .plate').length, 0);
+  assert.equal(add.disabled, false);
+  assert.equal(clock.pending(), 0);
+});
+
+test('cube scrambles with real face turns, solves itself, and takes keyboard moves', (t) => {
+  const { document, window, clock } = setup(t);
+  const cube = element(document, '[data-cube]');
+  const stage = element(document, '[data-cube-stage]');
+  assert.equal(cube.dataset.solved, 'true');
+  element(document, '[data-cube-scramble]').click();
+  clock.drain();
+  assert.equal(cube.dataset.solved, 'false');
+  assert.match(element(document, '[data-cube-live]').textContent, /scrambled with 20 random face turns/);
+  assert.equal(element(document, '[data-cube-tape]').textContent.split(' ').length, 10, 'The tape shows the latest moves');
+  element(document, '[data-cube-solve]').click();
+  clock.drain();
+  assert.equal(cube.dataset.solved, 'true');
+  assert.equal(element(document, '[data-cube-live]').textContent, 'Cube solved.');
+  const press = (key, shiftKey = false) => stage.dispatchEvent(new window.KeyboardEvent('keydown', { key, shiftKey, bubbles: true }));
+  press('r');
+  clock.drain();
+  assert.equal(cube.dataset.solved, 'false');
+  press('R', true);
+  clock.drain();
+  assert.equal(cube.dataset.solved, 'true', "R then R' returns home");
+  const before = stage.querySelector('.cube').style.transform;
+  press('ArrowLeft');
+  assert.notEqual(stage.querySelector('.cube').style.transform, before, 'Arrow keys turn the whole cube');
+  assert.equal(clock.pending(), 0);
+});
+
+test('keepy-uppy counts touches in the air and stops its loop once the ball lands', (t) => {
+  const { document, clock } = setup(t);
+  const ball = element(document, '[data-keepy-ball]');
+  ball.click();
+  assert.ok(clock.pending() > 0, 'A kicked ball is in flight');
+  clock.advance(200);
+  ball.click();
+  assert.equal(element(document, '[data-keepy-count]').textContent, '2', 'A touch before landing extends the streak');
+  clock.drain();
+  assert.equal(element(document, '[data-keepy-live]').textContent, 'Dropped after 2 touches. Best: 2.');
+  assert.equal(element(document, '[data-keepy-best]').textContent, '2');
+  assert.equal(clock.pending(), 0, 'The physics loop ends when the ball comes to rest');
+
+  const calm = setup(t, { reduced: true });
+  assert.equal(element(calm.document, '[data-keepy]').hidden, true, 'Reduced motion keeps the physics toy off');
+});
+
+test('reflex check rejects early taps and times a real reaction', (t) => {
+  const { document, clock } = setup(t);
+  const pad = element(document, '[data-reflex-pad]');
+  pad.click();
+  assert.equal(pad.dataset.state, 'waiting');
+  clock.advance(800);
+  pad.click();
+  assert.equal(pad.dataset.state, 'early', 'Tapping before the glove appears is too early');
+  clock.advance(800);
+  pad.click();
+  clock.advance(3500);
+  assert.equal(pad.dataset.state, 'go');
+  clock.advance(240);
+  pad.click();
+  assert.equal(pad.dataset.state, 'done');
+  assert.match(element(document, '[data-reflex-text]').textContent, /^\d+ ms · /);
+  assert.match(element(document, '[data-reflex-best]').textContent, /^\d+ ms$/);
+  clock.drain();
+  assert.equal(clock.pending(), 0);
+});
+
+test('companion wears emoji captions, reacts to hobbies and widget cheers, and its eyes follow a fine pointer', (t) => {
+  const { document, window, clock, visibility } = setup(t, { finePointer: true });
+  const buddy = element(document, '#scroll-companion');
+  const caption = element(document, '.buddy-caption');
+  visibility.enter([element(document, '#hobbies')]);
+  assert.equal(caption.textContent, 'Off the clock! 🎲');
+
+  const lift = element(document, '#hobby-lift');
+  lift.dispatchEvent(new window.MouseEvent('pointerover', { bubbles: true }));
+  assert.equal(caption.textContent, lift.dataset.buddy, 'Hovering a hobby gets a reaction');
+  document.dispatchEvent(new window.CustomEvent('buddy:say', { detail: { text: '2× bodyweight! 💪', pop: '💪' } }));
+  assert.equal(caption.textContent, '2× bodyweight! 💪', 'A widget cheer takes priority');
+  assert.ok(buddy.classList.contains('is-cheering'));
+  assert.equal(element(document, '.buddy-pop').textContent, '💪');
+  clock.drain();
+  assert.equal(caption.textContent, lift.dataset.buddy, 'After the cheer, the hover reaction returns');
+  element(document, '#contact').dispatchEvent(new window.MouseEvent('pointerover', { bubbles: true }));
+  assert.equal(caption.textContent, 'Off the clock! 🎲', 'Leaving the card restores the section caption');
+
+  movePointer(window, document.body, 900, 700);
+  assert.notEqual(buddy.style.getPropertyValue('--gaze-x'), '', 'The eyes track the pointer');
+  window.dispatchEvent(new window.Event('blur'));
+  assert.equal(buddy.style.getPropertyValue('--gaze-x'), '', 'The eyes return to center');
+  movePointer(window, document.body, 50, 60, 'touch');
+  assert.equal(buddy.style.getPropertyValue('--gaze-x'), '', 'Touch never moves the eyes');
+  assert.equal(clock.pending(), 0);
+});
+
+test('cursor wears a hobby emoji, shows widget labels, and shrinks over the chart', (t) => {
+  const { document, window, clock } = setup(t, { finePointer: true });
+  const ring = element(document, '#cursorRing');
+  const label = element(document, '#cursorLabel');
+  movePointer(window, element(document, '#hobby-poker .hobby-desc'), 300, 300);
+  assert.equal(label.textContent, '🃏');
+  assert.ok(ring.classList.contains('is-emoji'));
+  movePointer(window, element(document, '[data-cube-stage]'), 320, 320);
+  assert.equal(label.textContent, 'Drag');
+  assert.ok(ring.classList.contains('is-label') && !ring.classList.contains('is-emoji'));
+  movePointer(window, element(document, '[data-poker-chart]'), 340, 340);
+  assert.equal(label.textContent, '');
+  assert.ok(ring.classList.contains('is-precise'), 'The ring never hides the data being read');
+  document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
+  assert.equal(ring.classList.contains('is-precise'), false);
+  clock.drain();
+});
+
+test('below-the-fold cards reveal on entry, and stay visible without motion or JavaScript', (t) => {
+  const { document, window, visibility } = setup(t);
+  const card = element(document, '#hobby-cube');
+  assert.ok(document.documentElement.classList.contains('reveal-ready'));
+  assert.ok(card.classList.contains('reveal'));
+  visibility.enter([card]);
+  assert.ok(card.classList.contains('is-revealed'));
+  const end = new window.Event('animationend', { bubbles: true });
+  Object.defineProperty(end, 'animationName', { value: 'reveal-in' });
+  card.dispatchEvent(end);
+  assert.equal(card.classList.contains('reveal'), false, 'A revealed card returns to its normal styles');
+  for (const options of [{ reduced: true }, { javascript: false }]) {
+    const other = setup(t, options).document;
+    assert.equal(other.querySelectorAll('.reveal').length, 0, 'Nothing is hidden for reduced motion or without JavaScript');
+  }
+});
+
+test('the Konami code rains emoji once and cleans up after itself', (t) => {
+  const { document, window, clock } = setup(t, { finePointer: true });
+  const keys = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  for (const key of keys) document.dispatchEvent(new window.KeyboardEvent('keydown', { key, bubbles: true }));
+  const drops = document.querySelectorAll('#fxLayer .fx-rain');
+  assert.ok(drops.length > 20, 'Emoji rain falls');
+  assert.equal(element(document, '#fxLayer').getAttribute('aria-hidden'), 'true');
+  assert.equal(element(document, '.buddy-caption').textContent, 'Cheat code accepted! 🎮');
+  clock.drain();
+  assert.equal(document.querySelectorAll('#fxLayer > *').length, 0, 'Every drop is removed');
+  const calm = setup(t, { reduced: true, finePointer: true });
+  for (const key of keys) calm.document.dispatchEvent(new calm.window.KeyboardEvent('keydown', { key, bubbles: true }));
+  assert.equal(calm.document.querySelectorAll('#fxLayer > *').length, 0, 'Reduced motion skips the rain');
 });
