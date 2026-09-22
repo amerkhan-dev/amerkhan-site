@@ -17,7 +17,7 @@ npm run preview
 ## Content and behavior
 
 - `index.html` is the authoritative source for copy and final metric values. CSS is linked directly so the page remains styled when JavaScript is disabled.
-- `src/style.css` owns the dark purple theme, responsive layout, focus states, and reduced-motion styles. Space Grotesk, Inter, and IBM Plex Mono are self-hosted from the installed Fontsource packages.
+- `src/style.css` owns the black-and-gold theme (matched to the GitHub profile banner), responsive layout, focus states, and reduced-motion styles. Space Grotesk, Inter, and IBM Plex Mono are self-hosted from the installed Fontsource packages.
 - `src/main.ts` progressively enhances navigation, disclosures, counters, the custom cursor, card tilt, and scroll progress. Disclosure content is visible in HTML; JavaScript attaches native button handlers before collapsing panels. Keep this no-JavaScript fallback intact.
 - Counter animations are decorative overlays. Final values remain in the source and accessibility tree, including decimal places, commas, and suffixes. Counters animate once as they enter the viewport; reduced motion and unavailable browser APIs leave final values visible.
 - `src/companion.ts` and `src/companion.css` animate the decorative robot at its laptop while visitors scroll. It never intercepts clicks. The robot sits in the bottom corner on larger screens and in the header on phones, where it cannot cover the page copy. Captions appear on larger screens; reduced motion keeps the illustration still. The cursor and card tilt are enabled only for a fine pointer without reduced motion, and the native cursor returns for keyboard use.
