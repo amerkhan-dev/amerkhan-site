@@ -11,7 +11,7 @@
   user-select: none;
   will-change: transform, opacity;
 }
-.fx-spark { color: var(--violet-300); font-size: 12px; text-shadow: 0 0 8px rgba(196, 138, 255, .9); }
+.fx-spark { color: var(--gold-300); font-size: 12px; text-shadow: 0 0 8px rgba(235, 196, 99, .9); }
 @keyframes fx-burst {
   0% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
   12% { opacity: 1; }
@@ -58,14 +58,14 @@ html.reveal-ready .reveal.is-revealed { animation: reveal-in .8s var(--ease) var
   align-items: center;
   gap: 12px;
   padding: 6px 10px 6px 14px;
-  border: 1px solid rgba(196, 138, 255, .22);
+  border: 1px solid rgba(235, 196, 99, .22);
   border-radius: 100px;
-  background: rgba(145, 71, 255, .07);
-  color: var(--violet-100);
+  background: rgba(204, 162, 79, .07);
+  color: var(--gold-100);
   font: 12px var(--font-mono);
   transition: border-color .25s, background .25s;
 }
-.hero-hobbies:hover { border-color: var(--panel-border-hover); background: rgba(145, 71, 255, .16); }
+.hero-hobbies:hover { border-color: var(--panel-border-hover); background: rgba(204, 162, 79, .16); }
 .hero-hobbies-emoji { display: inline-flex; gap: 5px; font: 15px/1 var(--font-body); }
 .hero-hobbies-emoji span { display: inline-block; }
 .hero-hobbies:hover .hero-hobbies-emoji span { animation: hero-hop .6s var(--ease) both; }
@@ -74,10 +74,10 @@ html.reveal-ready .reveal.is-revealed { animation: reveal-in .8s var(--ease) var
 .hero-hobbies:hover .hero-hobbies-emoji span:nth-child(4) { animation-delay: .18s; }
 .hero-hobbies:hover .hero-hobbies-emoji span:nth-child(5) { animation-delay: .24s; }
 @keyframes hero-hop { 40% { transform: translateY(-6px) rotate(-8deg); } }
-.hero-hobbies .arrow { font-size: 18px; color: var(--violet-300); }
+.hero-hobbies .arrow { font-size: 18px; color: var(--gold-300); }
 
-.konami-hint { margin-left: 10px; color: #6f6585; font: 10px var(--font-mono); letter-spacing: .08em; transition: color .3s; }
-.konami-hint:hover { color: var(--violet-300); }
+.konami-hint { margin-left: 10px; color: #7e796c; font: 10px var(--font-mono); letter-spacing: .08em; transition: color .3s; }
+.konami-hint:hover { color: var(--gold-300); }
 
 @media (max-width: 600px) {
   .hero-hobbies { font-size: 11px; gap: 9px; }

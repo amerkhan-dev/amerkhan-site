@@ -8,7 +8,7 @@ export type EquityPoint = { trials: number; equity: number; low: number; high: n
 const SVG = 'http://www.w3.org/2000/svg';
 const HEIGHT = 128;
 const MARGIN = { top: 10, right: 52, bottom: 22, left: 40 };
-const LINE = '#a259ff'; // --violet-glow; validated against the dark card surface
+const LINE = '#ebc463'; // --gold-400; validated against the dark card surface
 const CHECKPOINTS = [250, 1000, 5000, 10000, 20000];
 
 const percent = (value: number, digits = 1) => `${(value * 100).toFixed(digits)}%`;

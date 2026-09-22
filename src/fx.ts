@@ -65,7 +65,7 @@ function spawn(className: string, x: number, y: number, content: string,
   layer.append(particle);
 }
 
-/** Pops a ring of emoji (or violet sparks) outward from a point in the viewport. */
+/** Pops a ring of emoji (or gold sparks) outward from a point in the viewport. */
 export function burst(x: number, y: number, emojis?: readonly string[], count = emojis?.length ? 8 : 10) {
   if (!motionAllowed()) return;
   const symbols = emojis?.length ? emojis : SPARKS;
